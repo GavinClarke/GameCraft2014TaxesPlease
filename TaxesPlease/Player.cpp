@@ -16,12 +16,13 @@ Player::Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 
 	fixtureDef.density = 0.1;
 	dynamicBody->CreateFixture(&fixtureDef);
 	m_KeyboardMan = KeyboardManager::getKeys();
-	m_texture = IMG_LoadTexture(gRenderer,"Player.png");
+	m_texture = IMG_LoadTexture(gRenderer,"images/player.png");
 	rect = SDL_Rect();
 	rect.h = dimentions.x*2;
 	rect.w = dimentions.y*2;
 	sm = new SoundManager();
 	sm->PlayBackground();
+	count = 0;
 }
 
 void Player::Update() {
@@ -35,15 +36,15 @@ void Player::Update() {
 		jump();
 		sm->PlayJumpSound();
 	}
-	else { isSpaceDown = false; }
+	else { count =0; }
 }
 
 void Player::moveLeft(){
-	dynamicBody->ApplyLinearImpulse(b2Vec2(-250,0),GetPosition(),true);
+	dynamicBody->ApplyForce(b2Vec2(-5000,0),GetPosition(),true);
 }
 
 void Player::moveRight(){
-	dynamicBody->ApplyLinearImpulse(b2Vec2(250,0),GetPosition(),true);
+	dynamicBody->ApplyForce(b2Vec2(5000,0),GetPosition(),true);
 }
 
 
@@ -55,10 +56,24 @@ void Player::Render(SDL_Renderer* gRenderer, b2Vec2 offset) {
 
 	rect.x = dynamicBody->GetPosition().x -(rect.w/2.0f)- offset.x;
 	rect.y = dynamicBody->GetPosition().y -(rect.h/2.0f)+ offset.y;
-	SDL_RenderCopy( gRenderer, m_texture, NULL, &rect );
+	SDL_Rect h = SDL_Rect();
+	h.x =0;
+	h.y =0;
+	h.w = 165;
+	h.h = 230;
+	SDL_RenderCopy( gRenderer, m_texture, &h, &rect );
 }
 
 void Player::jump(){
+	if(count <=3)
+	{
+		dynamicBody->ApplyLinearImpulse(b2Vec2(0,-1200), dynamicBody->GetPosition(), true);
+		count ++;
+	}
+}
 
-		dynamicBody->ApplyLinearImpulse(b2Vec2(0,-40), dynamicBody->GetPosition(), true);
+void Player::Death()
+{
+	sm->PauseBackground(true);
+	sm->PlayDeathSound();
 }

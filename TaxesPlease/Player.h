@@ -14,6 +14,9 @@ public:
 	void Render(SDL_Renderer* gRenderer, b2Vec2 offset );
 	void Update();
 	b2Vec2 GetPosition();
+	int count;
+	
+	void Death();
 private:
 	b2BodyDef myBodyDef;
 	b2Body* dynamicBody;

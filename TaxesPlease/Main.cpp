@@ -51,7 +51,7 @@ int main(int argc, char **argv){
 	
 	
 
-	b2Vec2 gravity =  b2Vec2(0.0f,4.981f);
+	b2Vec2 gravity =  b2Vec2(0.0f,9.81f);
 	bool doSleep = true;
 	b2World* world = new b2World(gravity);
 	world->SetContactListener(ContactListener::getListener());
