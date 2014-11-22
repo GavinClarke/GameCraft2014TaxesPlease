@@ -1,7 +1,7 @@
-﻿Build started 22/11/2014 16:36:03.
+﻿Build started 22/11/2014 16:37:31.
      1>Project "C:\Users\gavin\Desktop\TtaxesPlease\TaxesPlease\RWM_P2_GroupB.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I./ /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt BasicPlatform.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I./ /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt AnglePlatform.cpp BasicPlatform.cpp
          BasicPlatform.cpp
      1>c:\users\gavin\desktop\ttaxesplease\taxesplease\objectfactory.h(23): warning C4091: 'static ' : ignored on left of 'ObjectFactory' when no variable is declared
      1>c:\users\gavin\desktop\ttaxesplease\taxesplease\basicplatform.cpp(26): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
@@ -9,6 +9,14 @@
      1>c:\users\gavin\desktop\ttaxesplease\taxesplease\basicplatform.cpp(29): warning C4244: '=' : conversion from 'const float32' to 'int', possible loss of data
      1>c:\users\gavin\desktop\ttaxesplease\taxesplease\basicplatform.cpp(31): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
      1>c:\users\gavin\desktop\ttaxesplease\taxesplease\basicplatform.cpp(32): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+         AnglePlatform.cpp
+     1>c:\users\gavin\desktop\ttaxesplease\taxesplease\objectfactory.h(23): warning C4091: 'static ' : ignored on left of 'ObjectFactory' when no variable is declared
+     1>c:\users\gavin\desktop\ttaxesplease\taxesplease\angleplatform.cpp(19): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\gavin\desktop\ttaxesplease\taxesplease\angleplatform.cpp(21): warning C4244: '=' : conversion from 'const float32' to 'int', possible loss of data
+     1>c:\users\gavin\desktop\ttaxesplease\taxesplease\angleplatform.cpp(22): warning C4244: '=' : conversion from 'const float32' to 'int', possible loss of data
+     1>c:\users\gavin\desktop\ttaxesplease\taxesplease\angleplatform.cpp(24): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+     1>c:\users\gavin\desktop\ttaxesplease\taxesplease\angleplatform.cpp(25): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\gavin\Desktop\TtaxesPlease\TaxesPlease\Debug\RWM_P2_GroupB.exe" /INCREMENTAL /NOLOGO /LIBPATH:./lib SDL2_ttf.lib Box2D.lib SDL2.lib SDL2main.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\gavin\Desktop\TtaxesPlease\TaxesPlease\Debug\RWM_P2_GroupB.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\gavin\Desktop\TtaxesPlease\TaxesPlease\Debug\RWM_P2_GroupB.lib" /MACHINE:X86 Debug\AnglePlatform.obj
          Debug\BasicPlatform.obj
@@ -26,4 +34,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.34
+Time Elapsed 00:00:02.04
