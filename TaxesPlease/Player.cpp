@@ -46,7 +46,7 @@ b2Vec2 Player::GetPosition() {
 }
 
 void Player::Render(SDL_Renderer* gRenderer, b2Vec2 offset) {
-	SDL_RenderCopyEx ( gRenderer, m_texture, NULL, &m_texture, NULL, NULL, SDL_RendererFlip::SDL_FLIP_NONE );
+	SDL_RenderCopyEx ( gRenderer, m_texture, NULL, &m_texture, dynamicBody->GetAngle() * TORADIANS, NULL, SDL_RendererFlip::SDL_FLIP_NONE );
 }
 
 void Player::jump(){
