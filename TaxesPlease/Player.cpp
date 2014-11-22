@@ -17,6 +17,9 @@ Player::Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 
 	dynamicBody->CreateFixture(&fixtureDef);
 	m_KeyboardMan = KeyboardManager::getKeys();
 	m_texture = IMG_LoadTexture(gRenderer,"Player.png");
+	rect = SDL_Rect();
+	rect.h = dimentions.x;
+	rect.w = dimentions.y;
 }
 
 void Player::Update() {
@@ -46,7 +49,10 @@ b2Vec2 Player::GetPosition() {
 }
 
 void Player::Render(SDL_Renderer* gRenderer, b2Vec2 offset) {
-	SDL_RenderCopyEx ( gRenderer, m_texture, NULL, &m_texture, NULL, NULL, SDL_RendererFlip::SDL_FLIP_NONE );
+
+	rect.x = GetPosition().x;
+	rect.y = GetPosition().y;
+	SDL_RenderCopy( gRenderer, m_texture, NULL, &rect );
 }
 
 void Player::jump(){

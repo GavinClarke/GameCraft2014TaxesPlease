@@ -2,7 +2,6 @@
 #define SPINNER_H
 
 #include "Box2D\Box2D.h"
-#include "LTexture.h"
 #include "KeyboardManager.h"
 #include "ObjectFactory.h"
 
@@ -19,7 +18,7 @@ private:
 	b2PolygonShape polyShape;
 	b2Fixture* mFix;
 	b2FixtureDef fixtureDef;
-	LTexture mTexture;
+	//LTexture mTexture;
 	b2RevoluteJointDef rJD;
 	b2WeldJointDef wJD;
 	b2WeldJoint* m_weldJoint;

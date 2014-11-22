@@ -1,8 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <SDL_image.h>
+#include <SDL.h>
 #include "Box2D/Box2D.h"
-#include "LTexture.h"
 #include "KeyboardManager.h"
 
 class Player {
@@ -18,7 +19,8 @@ private:
 	b2PolygonShape playerShape;
 	b2Fixture* mFix;
 	b2FixtureDef fixtureDef;
-	SDL_Texture m_texture;
+	SDL_Texture * m_texture;
+	SDL_Rect rect;
 	bool isSpaceDown;
 	KeyboardManager* m_KeyboardMan;
 	void moveLeft();
