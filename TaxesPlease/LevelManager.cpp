@@ -31,5 +31,4 @@ void LevelManager::Draw()
 	plat->Draw(mRenderer,b2Vec2(0,0));
 	angPlat->Draw(mRenderer,b2Vec2(0,0));
 	player->Render(mRenderer,b2Vec2(0,0));
-	rightWall->Draw(mRenderer,b2Vec2(0,0));
 }

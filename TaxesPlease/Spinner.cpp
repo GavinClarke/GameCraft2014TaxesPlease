@@ -4,7 +4,7 @@
 #include "Spinner.h"
 
 Spinner::Spinner(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 dimensions, float speed) {
-	mTexture.loadFromFile( "Spinner.png", gRenderer );
+	//mTexture.loadFromFile( "Spinner.png", gRenderer );
 
 	pivotPoint = ObjectFactory::instance()->createPlatform(world, position, b2Vec2(0.01,0.01), 0, b2_staticBody, 0.1f);
 	pivotPoint->SetUserData((void*)-2);
@@ -33,12 +33,12 @@ Spinner::~Spinner() {
 }
 
 void Spinner::Draw(SDL_Renderer* gRenderer, b2Vec2 offset) { 
-	mTexture.render((platformOne->GetPosition().x) - (mTexture.getWidth() / 2) - offset.x,
+	/*mTexture.render((platformOne->GetPosition().x) - (mTexture.getWidth() / 2) - offset.x,
 		-(platformOne->GetPosition().y) - (mTexture.getHeight() / 2) + offset.y, NULL, 
 		platformOne->GetAngle() * TORADIANS, NULL, SDL_FLIP_NONE, gRenderer );
 
 	mTexture.render((platformTwo->GetPosition().x) - (mTexture.getWidth() / 2) - offset.x,
 		-(platformTwo->GetPosition().y) - (mTexture.getHeight() / 2) + offset.y, NULL, 
 		platformTwo->GetAngle() * TORADIANS, NULL, SDL_FLIP_NONE, gRenderer );
-
+		*/
 }

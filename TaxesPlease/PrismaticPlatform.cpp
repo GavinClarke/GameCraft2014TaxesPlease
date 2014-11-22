@@ -9,6 +9,7 @@ PrismaticPlatform::PrismaticPlatform(b2World* world, SDL_Renderer* gRenderer, fl
 	//mTexture.loadFromFile( "PrismaticPlatform.png", gRenderer );
 
 	m_texture = SDL_CreateTextureFromSurface( gRenderer, IMG_Load( "PrismaticPlatform.png") );
+
 	anchor = ObjectFactory::instance()->createPlatform(world, b2Vec2(leftBound, yPosition), b2Vec2(0.01, 0.01), 0, b2_staticBody, 0.1f);
 	anchor->SetUserData((void*)-2);
 	b2Filter f; f.groupIndex = -1; anchor->GetFixtureList()[0].SetFilterData(f);
@@ -31,8 +32,8 @@ void PrismaticPlatform::Draw(SDL_Renderer* gRenderer, b2Vec2 offset) {
 	SDL_Rect stretchRect;
 	float rotation = platform->GetAngle() * TORADIANS;
 
-	stretchRect.x = (platform->GetPosition().x) - (size.x / 2) - offset.x;
-	stretchRect.y = -(platform->GetPosition().y) - (size.y / 2) + offset.y;
+	stretchRect.x = (platform->GetPosition().x ) - (size.x / 2) - offset.x;
+	stretchRect.y = -(platform->GetPosition().y ) - (size.y / 2) + offset.y;
 	stretchRect.w = size.x;
 	stretchRect.h = size.y;
 
