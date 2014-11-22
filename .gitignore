@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Compiled Object files
 *.slo
 *.lo
@@ -26,3 +27,6 @@
 *.exe
 *.out
 *.app
+=======
+RWM_P2_GroupB/RWM_P2_GroupB.opensdf
+>>>>>>> origin/master
