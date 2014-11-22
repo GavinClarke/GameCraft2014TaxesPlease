@@ -49,9 +49,9 @@ b2Vec2 Player::GetPosition() {
 }
 
 void Player::Render(SDL_Renderer* gRenderer, b2Vec2 offset) {
+
 	rect.x = GetPosition().x;
 	rect.y = GetPosition().y;
-	rect.h = 
 	SDL_RenderCopy( gRenderer, m_texture, NULL, &rect );
 }
 
