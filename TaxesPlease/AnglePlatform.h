@@ -6,7 +6,6 @@
 #include "ObjectFactory.h"
 #include <SDL_image.h>
 #include <SDL.h>
-#include "ObjectFactory.h"
 
 class AnglePlatform {
 public:

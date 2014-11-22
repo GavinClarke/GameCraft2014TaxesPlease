@@ -4,7 +4,6 @@
 #include "Box2D\Box2D.h"
 #include "LTexture.h"
 #include "KeyboardManager.h"
-#include "ObjectFactory.h"
 
 
 //Platform will need its position to be inherited from Base platform
