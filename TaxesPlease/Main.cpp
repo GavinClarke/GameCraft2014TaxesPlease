@@ -54,10 +54,10 @@ int main(int argc, char **argv){
 
 	double mClock = SDL_GetTicks();
 	while(QUIT){
-		KeyboardManager::getKeys()->Update(eHandler);
+		/*KeyboardManager::getKeys()->Update(eHandler);
 		double deltaTime = SDL_GetTicks() - mClock;
 		game->update(deltaTime/1000.0f);
-		mClock += deltaTime;
+		mClock += deltaTime;*/
 	}
 	SDL_Quit();
 

@@ -13,7 +13,7 @@ void Game::update(double deltaTime){
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
 	
-	mWorld->Step(timeStep, velocityIterations, positionIterations);	
+	//mWorld->Step(timeStep, velocityIterations, positionIterations);	
 
 	SDL_RenderClear( mRenderer );
 
