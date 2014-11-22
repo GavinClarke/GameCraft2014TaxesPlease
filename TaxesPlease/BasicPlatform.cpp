@@ -11,7 +11,7 @@ BasicPlatform::BasicPlatform(b2World* world, SDL_Renderer* gRenderer, b2Vec2 pos
 	m_texture = SDL_CreateTextureFromSurface( gRenderer, IMG_Load( "Platform.png"  ));
 
 
-	staticBody = ObjectFactory::instance()->createPlatform(world, position, dimensions, angleRadians, b2_staticBody);
+	staticBody = ObjectFactory::instance()->createPlatform(world, position, dimensions, angleRadians, b2_staticBody,1);
 	staticBody->SetUserData((void*)-2);
 
 }

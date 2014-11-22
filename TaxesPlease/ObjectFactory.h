@@ -8,8 +8,8 @@ static class ObjectFactory {
 public:
 	static ObjectFactory* m_instance;
 	static ObjectFactory* instance();
-	ObjectFactory(void) {}
-	~ObjectFactory(void) {}
+	ObjectFactory(void) ;
+	~ObjectFactory(void) ;
 
 	static b2Body* createPlatform(b2World* world, b2Vec2 psoition, b2Vec2 dimensions, float angle, b2BodyType type, float density);
 
