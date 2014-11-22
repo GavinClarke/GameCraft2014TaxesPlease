@@ -7,7 +7,7 @@ class Game
 {
 private:
 	SDL_Renderer* mRenderer;
-	b2World* mWorld;
+	b2World* mWorld;	
 
 public:
 	Game(SDL_Renderer* renderer, b2World* bworld);
