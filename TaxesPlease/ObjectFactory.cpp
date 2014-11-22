@@ -32,7 +32,7 @@ b2Body* ObjectFactory::createPlatform(b2World* world, b2Vec2 position, b2Vec2 di
 b2Joint* ObjectFactory::createPulleyJoint(b2World* world, b2Body* body1, b2Body* body2, b2Vec2 groundAnchorA, b2Vec2 groundAnchorB, b2Vec2 anchorA, b2Vec2 anchorB) {
 	b2PulleyJointDef pullJoint = b2PulleyJointDef();
 	pullJoint.Initialize(body1, body2, b2Vec2(groundAnchorA.x*PIXELSTOMETRES, -groundAnchorA.y*PIXELSTOMETRES), b2Vec2(groundAnchorB.x*PIXELSTOMETRES, -groundAnchorB.y*PIXELSTOMETRES), 
-		b2Vec2(anchorA.x*PIXELSTOMETRES, -anchorA.y*PIXELSTOMETRES), b2Vec2(anchorB.x*PIXELSTOMETRES, -anchorB.y*PIXELSTOMETRES));
+		b2Vec2(anchorA.x*PIXELSTOMETRES, -anchorA.y*PIXELSTOMETRES), b2Vec2(anchorB.x*PIXELSTOMETRES, -anchorB.y*PIXELSTOMETRES), 1);
 	pullJoint.collideConnected = false;
 	b2Joint* joint = world->CreateJoint(&pullJoint);
 	return joint;
