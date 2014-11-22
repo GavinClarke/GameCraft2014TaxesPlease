@@ -2,7 +2,6 @@
 #define REVOLUTEPLATFORMS_H
 
 #include "Box2D\Box2D.h"
-#include "LTexture.h"
 #include "KeyboardManager.h"
 #include "ObjectFactory.h"
 

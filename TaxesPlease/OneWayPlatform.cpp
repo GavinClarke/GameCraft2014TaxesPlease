@@ -8,7 +8,7 @@ OneWayPlatform::OneWayPlatform(b2World* world, SDL_Renderer* gRenderer, b2Vec2 p
 	mSize = dimensions;
 	m_texture = SDL_CreateTextureFromSurface( gRenderer, IMG_Load( "OneWayPlatformPlatform.png"  ));
 
-	staticBody = ObjectFactory::instance()->createPlatform(world, position, dimensions, angleRadians, b2_staticBody);
+	staticBody = ObjectFactory::instance()->createPlatform(world, position, dimensions, angleRadians, b2_staticBody,1);
 	staticBody->SetUserData((void*)-6);
 	
 }

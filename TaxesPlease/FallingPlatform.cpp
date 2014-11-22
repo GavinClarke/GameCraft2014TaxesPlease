@@ -11,7 +11,7 @@ FallingPlatform::FallingPlatform(b2World* world, SDL_Renderer* gRenderer, b2Vec2
 	m_texture = SDL_CreateTextureFromSurface( gRenderer, IMG_Load( "FallingPlatform.png"  ));
 	
 	//m_BodyDef.userData = (void*)-7;
-	dynamicBody = ObjectFactory::instance()->createPlatform(world, position, dimensions, angleRadians, b2_staticBody);
+	dynamicBody = ObjectFactory::instance()->createPlatform(world, position, dimensions, angleRadians, b2_staticBody,1);
 	dynamicBody->SetType(b2_dynamicBody);
 	dynamicBody->SetUserData((void*)-7);
 }
