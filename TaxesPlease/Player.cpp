@@ -18,8 +18,8 @@ Player::Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 
 	m_KeyboardMan = KeyboardManager::getKeys();
 	m_texture = IMG_LoadTexture(gRenderer,"Player.png");
 	rect = SDL_Rect();
-	rect.h = dimentions.x;
-	rect.w = dimentions.y;
+	rect.h = dimentions.x*2;
+	rect.w = dimentions.y*2;
 }
 
 void Player::Update() {
@@ -50,12 +50,12 @@ b2Vec2 Player::GetPosition() {
 
 void Player::Render(SDL_Renderer* gRenderer, b2Vec2 offset) {
 
-	rect.x = dynamicBody->GetPosition().x;
-	rect.y = dynamicBody->GetPosition().y;
+	rect.x = dynamicBody->GetPosition().x -(rect.w/2.0f)- offset.x;
+	rect.y = dynamicBody->GetPosition().y -(rect.h/2.0f)+ offset.y;
 	SDL_RenderCopy( gRenderer, m_texture, NULL, &rect );
 }
 
 void Player::jump(){
 
-		dynamicBody->ApplyLinearImpulse(b2Vec2(0,-800), dynamicBody->GetPosition(), true);
+		dynamicBody->ApplyLinearImpulse(b2Vec2(0,-40), dynamicBody->GetPosition(), true);
 }

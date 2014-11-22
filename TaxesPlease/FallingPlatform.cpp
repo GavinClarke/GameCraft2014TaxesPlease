@@ -23,7 +23,6 @@ FallingPlatform::~FallingPlatform()
 
 void FallingPlatform::Update()
 {
-	CheckBombCollision();
 	CheckPlayerCollision();
 }
 
@@ -46,12 +45,5 @@ void FallingPlatform::CheckPlayerCollision()//b2Body* PlayerBody)
 	if ((int)dynamicBody->GetUserData() == -200) {
 		dynamicBody->SetGravityScale(1);//apply gravity
 		dynamicBody->SetLinearVelocity(b2Vec2(0,-9.81f));
-	}	
-}
-
-void FallingPlatform::CheckBombCollision()
-{
-	if ((int)dynamicBody->GetUserData() == -300) {
-		dynamicBody->SetLinearVelocity(b2Vec2_zero);
 	}	
 }

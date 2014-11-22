@@ -8,6 +8,7 @@
 #include "Game.h"
 #include "KeyboardManager.h"
 #include "Constants.h"
+#include "ContactListener.h"
 //Screen dimension constants 
 const int SCREEN_WIDTH = 1280; 
 const int SCREEN_HEIGHT = 720;
@@ -53,6 +54,7 @@ int main(int argc, char **argv){
 	b2Vec2 gravity =  b2Vec2(0.0f,4.981f);
 	bool doSleep = true;
 	b2World* world = new b2World(gravity);
+	world->SetContactListener(ContactListener::getListener());
 	game = new Game(renderer,world,c);
 
 	double mClock = SDL_GetTicks();
