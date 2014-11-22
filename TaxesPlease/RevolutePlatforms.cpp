@@ -12,7 +12,7 @@ RevolutePlatforms::RevolutePlatforms(b2World* world, SDL_Renderer* gRenderer, b2
 	pivotPoint->SetUserData((void*)-2);
 	b2Filter f; f.groupIndex = -1; pivotPoint->GetFixtureList()[0].SetFilterData(f);
 
-	centre = ObjectFactory::instance()->createPlatform(world, position, b2Vec2(radius * PIXELSTOMETRES, 10*PIXELSTOMETRES), 0, b2_dynamicBody, 1.0f);
+	centre = ObjectFactory::instance()->createPlatform(world, position, b2Vec2(radius, 10), 0, b2_dynamicBody, 1.0f);
 	b2Filter f; f.groupIndex = -1; pivotPoint->GetFixtureList()[0].SetFilterData(f);
 
 	platformOne = ObjectFactory::instance()->createPlatform(world, position, dimensions, 0, b2_dynamicBody, 0.1f);
@@ -23,7 +23,7 @@ RevolutePlatforms::RevolutePlatforms(b2World* world, SDL_Renderer* gRenderer, b2
 
 	m_centreJoint = ObjectFactory::instance()->createRevoluteJoint(world, pivotPoint, centre, centre->GetWorldCenter());
 	m_centreJoint->EnableMotor(true);
-	m_centreJoint->SetMotorSpeed(speed*PIXELSTOMETRES);
+	m_centreJoint->SetMotorSpeed(speed);
 	m_centreJoint->SetMaxMotorTorque(1000);
 
 	m_platformJoint1 = ObjectFactory::instance()->createRevoluteJoint(world, centre, platformOne, platformOne->GetWorldCenter());
@@ -43,15 +43,15 @@ void RevolutePlatforms::Draw(SDL_Renderer* gRenderer, b2Vec2 offset) {
 	SDL_Rect stretchRect;
 	float rotation = platformOne->GetAngle() * TORADIANS;
 
-	stretchRect.x = (platformOne->GetPosition().x * METRESTOPIXELS) - (size.x / 2) - offset.x;
-	stretchRect.y = -(platformOne->GetPosition().y * METRESTOPIXELS) - (size.y / 2) + offset.y;
+	stretchRect.x = (platformOne->GetPosition().x) - (size.x / 2) - offset.x;
+	stretchRect.y = -(platformOne->GetPosition().y) - (size.y / 2) + offset.y;
 	stretchRect.w = size.x;
 	stretchRect.h = size.y;
 
 	SDL_RenderCopyEx(gRenderer, m_texture, NULL, &stretchRect, rotation, NULL, SDL_FLIP_NONE);
 
-	stretchRect.x = (platformTwo->GetPosition().x * METRESTOPIXELS) - (size.x / 2) - offset.x;
-	stretchRect.y = -(platformTwo->GetPosition().y * METRESTOPIXELS) - (size.y / 2) + offset.y;
+	stretchRect.x = (platformTwo->GetPosition().x) - (size.x / 2) - offset.x;
+	stretchRect.y = -(platformTwo->GetPosition().y) - (size.y / 2) + offset.y;
 	stretchRect.w = size.x;
 	stretchRect.h = size.y;
 
