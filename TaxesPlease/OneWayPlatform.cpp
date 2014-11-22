@@ -6,7 +6,7 @@
 
 OneWayPlatform::OneWayPlatform(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position,b2Vec2 dimensions, float angleRadians) {
 	mSize = dimensions;
-	m_texture = SDL_CreateTextureFromSurface( gRenderer, IMG_Load( "FallingPlatform.png"  ));
+	m_texture = SDL_CreateTextureFromSurface( gRenderer, IMG_Load( "OneWayPlatformPlatform.png"  ));
 
 	staticBody = ObjectFactory::instance()->createPlatform(world, position, dimensions, angleRadians, b2_staticBody);
 	staticBody->SetUserData((void*)-6);
@@ -23,8 +23,8 @@ void OneWayPlatform::Draw(SDL_Renderer* gRenderer, b2Vec2 offset) {
 	//SDL_RenderDrawLine
 	float rotation = (staticBody->GetAngle()*180.0/3.14159265);
 
-	stretchRect.x = (staticBody->GetPosition().x  * METRESTOPIXELS) -(mSize.x/2.0f);
-	stretchRect.y = (staticBody->GetPosition().y  * METRESTOPIXELS) -(mSize.y/2.0f);
+	stretchRect.x = (staticBody->GetPosition().x  * METRESTOPIXELS) -(mSize.x/2.0f) - offset.x;
+	stretchRect.y = (staticBody->GetPosition().y  * METRESTOPIXELS) -(mSize.y/2.0f) + offset.y;
 
 	stretchRect.w = mSize.x; 
 	stretchRect.h = mSize.y;
