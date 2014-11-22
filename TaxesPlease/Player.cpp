@@ -20,6 +20,8 @@ Player::Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 
 	rect = SDL_Rect();
 	rect.h = dimentions.x;
 	rect.w = dimentions.y;
+	sm = new SoundManager();
+	sm->PlayBackground();
 }
 
 void Player::Update() {
@@ -31,6 +33,7 @@ void Player::Update() {
 	}
 	if (KeyboardManager::getKeys()->Key_Up) {
 		jump();
+		sm->PlayJumpSound();
 	}
 	else { isSpaceDown = false; }
 }

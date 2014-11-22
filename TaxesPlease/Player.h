@@ -5,6 +5,7 @@
 #include <SDL.h>
 #include "Box2D/Box2D.h"
 #include "KeyboardManager.h"
+#include "SoundManager.h"
 
 class Player {
 public:
@@ -21,6 +22,7 @@ private:
 	b2FixtureDef fixtureDef;
 	SDL_Texture * m_texture;
 	SDL_Rect rect;
+	SoundManager* sm;
 	bool isSpaceDown;
 	KeyboardManager* m_KeyboardMan;
 	void moveLeft();
