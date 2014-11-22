@@ -4,6 +4,9 @@
 Game::Game(SDL_Renderer* renderer,b2World* bworld,Constants * con) : mRenderer(renderer), mWorld(bworld){
 	c = con;
 	menu = new Menu(renderer,c);
+	runGame = false;
+	level = new LevelManager(bworld,renderer);
+	
 }
 
 
@@ -17,14 +20,32 @@ void Game::update(double deltaTime){
 	mWorld->Step(timeStep, velocityIterations, positionIterations);	
 
 	SDL_RenderClear( mRenderer );
-
+	int i=0;
+	if(runGame == false)
+	{
+	  i = menu->Update();
+	}
+	else
+	{
+		level->Update();
+	}
 	
-	menu->Update();
-	
-	
+	if(i == 1)
+	{
+		runGame = true;
+	}
 	if(KeyboardManager::getKeys()->Key_R){
 		c->QUIT = false;
 	}
-	menu->Draw();
+
+	if(runGame == false)
+	{
+		menu->Draw();
+	}
+	else
+	{
+		level->Draw();
+	}
+	
 	SDL_RenderPresent( mRenderer );
 }

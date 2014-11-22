@@ -15,7 +15,7 @@ public:
 	~BasicPlatform ();
 private:
 	b2Body* staticBody;
-
+	SDL_Renderer * mRenderer;
 	b2Vec2 mSize;
 	SDL_Texture* m_texture;
 };

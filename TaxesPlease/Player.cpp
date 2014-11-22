@@ -6,7 +6,7 @@
 
 Player::Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 dimentions) : isSpaceDown(false) {
 	myBodyDef.type = b2_dynamicBody;
-	myBodyDef.position.Set(position.x * PIXELSTOMETRES, -position.y * PIXELSTOMETRES);
+	myBodyDef.position.Set(position.x , position.y );
 	myBodyDef.userData = (void*)0;
 	myBodyDef.angularDamping = 2;
 	dynamicBody = world->CreateBody(&myBodyDef);
@@ -23,24 +23,23 @@ Player::Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 
 }
 
 void Player::Update() {
-	if (m_KeyboardMan->Key_Left) {
+	if (KeyboardManager::getKeys()->Key_Left) {
 		moveLeft();
 	}
-	else if (m_KeyboardMan->Key_Right) {
+	else if (KeyboardManager::getKeys()->Key_Right) {
 		moveRight();
 	}
-	if (m_KeyboardMan->Key_Space) {
+	if (KeyboardManager::getKeys()->Key_Up) {
 		jump();
 	}
-	else { isSpaceDown = false; }
 }
 
 void Player::moveLeft(){
-			dynamicBody->ApplyForceToCenter(b2Vec2(5,0),true);
+	dynamicBody->ApplyLinearImpulse(b2Vec2(500,0),GetPosition(),true);
 }
 
 void Player::moveRight(){
-	dynamicBody->ApplyForceToCenter(b2Vec2(-5,0),true);
+	dynamicBody->ApplyLinearImpulse(b2Vec2(500,0),GetPosition(),true);
 }
 
 
@@ -50,14 +49,11 @@ b2Vec2 Player::GetPosition() {
 
 void Player::Render(SDL_Renderer* gRenderer, b2Vec2 offset) {
 
-	rect.x = GetPosition().x;
-	rect.y = GetPosition().y;
+	rect.x = dynamicBody->GetPosition().x;
+	rect.y = dynamicBody->GetPosition().y;
 	SDL_RenderCopy( gRenderer, m_texture, NULL, &rect );
 }
 
 void Player::jump(){
-	if (dynamicBody->GetContactList() && !isSpaceDown) {
-			dynamicBody->ApplyLinearImpulse(b2Vec2(0,12.5), dynamicBody->GetPosition(), true);
-			isSpaceDown = true;
-	}
+	dynamicBody->ApplyLinearImpulse(b2Vec2(0,-1200.5), dynamicBody->GetPosition(), true);
 }

@@ -3,6 +3,7 @@
 #include "KeyboardManager.h"
 #include "Menu.h"
 #include "Constants.h"
+#include "LevelManager.h"
 #pragma once
 
 class Game
@@ -12,6 +13,8 @@ private:
 	b2World* mWorld;	
 	Menu * menu;
 	Constants * c;
+	bool runGame;
+	LevelManager * level;
 
 public:
 	Game(SDL_Renderer* renderer, b2World* bworld,Constants * con);
