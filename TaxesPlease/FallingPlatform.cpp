@@ -33,8 +33,8 @@ void FallingPlatform::Draw(SDL_Renderer* renderer, b2Vec2 offset){
 	//SDL_RenderDrawLine
 	float rotation = (dynamicBody->GetAngle()*180.0/3.14159265);
 
-	stretchRect.x = (dynamicBody->GetPosition().x  * METRESTOPIXELS) -(mSize.x/2.0f) - offset.x;
-	stretchRect.y = (dynamicBody->GetPosition().y  * METRESTOPIXELS) -(mSize.y/2.0f) + offset.y;
+	stretchRect.x = (dynamicBody->GetPosition().x ) -(mSize.x/2.0f) - offset.x;
+	stretchRect.y = (dynamicBody->GetPosition().y ) -(mSize.y/2.0f) + offset.y;
 
 	stretchRect.w = mSize.x; 
 	stretchRect.h = mSize.y;
