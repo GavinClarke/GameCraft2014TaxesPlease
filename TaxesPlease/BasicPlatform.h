@@ -3,8 +3,6 @@
 
 #include "Box2D\Box2D.h"
 #include "KeyboardManager.h"
-#include <SDL_image.h>
-#include <SDL.h>
 #include "ObjectFactory.h"
 
 class BasicPlatform {

@@ -4,8 +4,6 @@
 #include "Box2D\Box2D.h"
 #include "KeyboardManager.h"
 #include "ObjectFactory.h"
-#include <SDL_image.h>
-#include <SDL.h>
 
 class AnglePlatform {
 public:
@@ -16,7 +14,6 @@ public:
 private:
 
 	b2Body* staticBody;
-
 	b2Vec2 mSize;
 	SDL_Texture* m_texture;
 };
