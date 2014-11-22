@@ -16,7 +16,7 @@ Player::Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 
 	fixtureDef.density = 0.1;
 	dynamicBody->CreateFixture(&fixtureDef);
 	m_KeyboardMan = KeyboardManager::getKeys();
-	m_texture.loadFromFile( "Player.png", gRenderer );
+	m_texture = IMG_LoadTexture(gRenderer,"Player.png");
 }
 
 void Player::Update() {
