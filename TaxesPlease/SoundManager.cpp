@@ -3,6 +3,7 @@
 
 SoundManager::SoundManager(void)
 {
+	//load the wav files
 	jump = Mix_LoadWAV("sfx/Jump.wav");
 	background = Mix_LoadMUS("sfx/Background.wav");
 	death = Mix_LoadWAV("sfx/Death.wav");
@@ -37,6 +38,8 @@ void SoundManager::PlayMenuSound()
 
 void SoundManager::PauseBackground(bool b)
 {
+	//Pauses or unpauses the background music based on bool fed in
+	//true = pause music, false = resume music
 	if (b == true)
 	{
 		Mix_PauseMusic();
