@@ -12,8 +12,14 @@ RevolutePlatforms::RevolutePlatforms(b2World* world, SDL_Renderer* gRenderer, b2
 	pivotPoint->SetUserData((void*)-2);
 	b2Filter f; f.groupIndex = -1; pivotPoint->GetFixtureList()[0].SetFilterData(f);
 
+<<<<<<< HEAD
 	centre = ObjectFactory::instance()->createPlatform(world, position, b2Vec2(radius, 10), 0, b2_dynamicBody, 1.0f);
 	b2Filter f; f.groupIndex = -1; pivotPoint->GetFixtureList()[0].SetFilterData(f);
+=======
+	centre = ObjectFactory::instance()->createPlatform(world, position, b2Vec2(radius * PIXELSTOMETRES, 10*PIXELSTOMETRES), 0, b2_dynamicBody, 1.0f);
+	
+	f.groupIndex = -1; pivotPoint->GetFixtureList()[0].SetFilterData(f);
+>>>>>>> 18a7fa23d6e65586a03ffe9b6b0348ecf32433bb
 
 	platformOne = ObjectFactory::instance()->createPlatform(world, position, dimensions, 0, b2_dynamicBody, 0.1f);
 	platformOne->SetFixedRotation(true);

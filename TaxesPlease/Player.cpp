@@ -20,6 +20,8 @@ Player::Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 
 	rect = SDL_Rect();
 	rect.h = dimentions.x;
 	rect.w = dimentions.y;
+	sm = new SoundManager();
+	sm->PlayBackground();
 }
 
 void Player::Update() {
@@ -31,15 +33,17 @@ void Player::Update() {
 	}
 	if (KeyboardManager::getKeys()->Key_Up) {
 		jump();
+		sm->PlayJumpSound();
 	}
+	else { isSpaceDown = false; }
 }
 
 void Player::moveLeft(){
-	dynamicBody->ApplyLinearImpulse(b2Vec2(500,0),GetPosition(),true);
+	dynamicBody->ApplyLinearImpulse(b2Vec2(-250,0),GetPosition(),true);
 }
 
 void Player::moveRight(){
-	dynamicBody->ApplyLinearImpulse(b2Vec2(500,0),GetPosition(),true);
+	dynamicBody->ApplyLinearImpulse(b2Vec2(250,0),GetPosition(),true);
 }
 
 
@@ -55,5 +59,6 @@ void Player::Render(SDL_Renderer* gRenderer, b2Vec2 offset) {
 }
 
 void Player::jump(){
-	dynamicBody->ApplyLinearImpulse(b2Vec2(0,-1200.5), dynamicBody->GetPosition(), true);
+
+		dynamicBody->ApplyLinearImpulse(b2Vec2(0,-800), dynamicBody->GetPosition(), true);
 }

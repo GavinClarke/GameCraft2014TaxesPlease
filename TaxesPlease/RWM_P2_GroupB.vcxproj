@@ -60,7 +60,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>./lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2_ttf.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2_ttf.lib;Box2D.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_Mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -84,25 +84,35 @@
     <ClCompile Include="AnglePlatform.cpp" />
     <ClCompile Include="BasicPlatform.cpp" />
     <ClCompile Include="Constants.cpp" />
+    <ClCompile Include="FallingPlatform.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="KeyboardManager.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
+    <ClCompile Include="OneWayPlatform.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PrismaticPlatform.cpp" />
+    <ClCompile Include="RevolutePlatforms.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Spinner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnglePlatform.h" />
     <ClInclude Include="BasicPlatform.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="FallingPlatform.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="KeyboardManager.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="ObjectFactory.h" />
+    <ClInclude Include="OneWayPlatform.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PrismaticPlatform.h" />
+    <ClInclude Include="RevolutePlatforms.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Spinner.h" />
   </ItemGroup>
   <ItemGroup>
