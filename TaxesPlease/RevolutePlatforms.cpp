@@ -50,4 +50,10 @@ void RevolutePlatforms::Draw(SDL_Renderer* gRenderer, b2Vec2 offset) {
 
 	SDL_RenderCopyEx(gRenderer, m_texture, NULL, &stretchRect, rotation, NULL, SDL_FLIP_NONE);
 
+	stretchRect.x = (platformTwo->GetPosition().x * METRESTOPIXELS) - (size.x / 2) - offset.x;
+	stretchRect.y = -(platformTwo->GetPosition().y * METRESTOPIXELS) - (size.y / 2) + offset.y;
+	stretchRect.w = size.x;
+	stretchRect.h = size.y;
+
+	SDL_RenderCopyEx(gRenderer, m_texture, NULL, &stretchRect, rotation, NULL, SDL_FLIP_NONE);
 }
