@@ -37,7 +37,7 @@ int main(int argc, char **argv){
 	//if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ){
 		//std::cout <<( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
 	//}
-
+	Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096);
 	window = SDL_CreateWindow( "TaxesPlease", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN ); 
 	renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED ); 
 	SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF ); 

@@ -60,7 +60,11 @@
     <ClCompile Include="RevolutePlatforms.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="ContactListener.cpp">
+=======
+    <ClCompile Include="SoundManager.cpp">
+>>>>>>> 18a7fa23d6e65586a03ffe9b6b0348ecf32433bb
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,7 +111,11 @@
     <ClInclude Include="RevolutePlatforms.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="ContactListener.h">
+=======
+    <ClInclude Include="SoundManager.h">
+>>>>>>> 18a7fa23d6e65586a03ffe9b6b0348ecf32433bb
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

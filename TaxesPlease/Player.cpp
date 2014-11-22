@@ -18,8 +18,15 @@ Player::Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 
 	m_KeyboardMan = KeyboardManager::getKeys();
 	m_texture = IMG_LoadTexture(gRenderer,"Player.png");
 	rect = SDL_Rect();
+<<<<<<< HEAD
 	rect.h = dimentions.x*2;
 	rect.w = dimentions.y*2;
+=======
+	rect.h = dimentions.x;
+	rect.w = dimentions.y;
+	sm = new SoundManager();
+	sm->PlayBackground();
+>>>>>>> 18a7fa23d6e65586a03ffe9b6b0348ecf32433bb
 }
 
 void Player::Update() {
@@ -31,6 +38,7 @@ void Player::Update() {
 	}
 	if (KeyboardManager::getKeys()->Key_Up) {
 		jump();
+		sm->PlayJumpSound();
 	}
 	else { isSpaceDown = false; }
 }
