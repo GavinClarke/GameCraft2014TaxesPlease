@@ -15,13 +15,9 @@ public:
 	~BasicPlatform ();
 private:
 	b2Body* staticBody;
-<<<<<<< HEAD
+
 	b2Vec2 mSize;
 	SDL_Texture* m_texture;
-=======
-	SDL_Texture *  m_texture;
-	SDL_Rect rect;
->>>>>>> c72104e0011bbe600c3c24110b3795a2e7fad7f7
 };
 
 #endif
