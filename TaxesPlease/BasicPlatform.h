@@ -2,8 +2,10 @@
 #define _BASICPLATFORM_H_
 
 #include "Box2D\Box2D.h"
-#include "LTexture.h"
 #include "KeyboardManager.h"
+#include <SDL_image.h>
+#include <SDL.h>
+#include "ObjectFactory.h"
 
 class BasicPlatform {
 public:
@@ -13,7 +15,8 @@ public:
 	~BasicPlatform ();
 private:
 	b2Body* staticBody;
-	LTexture m_texture;
+	SDL_Texture *  m_texture;
+	SDL_Rect rect;
 };
 
 #endif

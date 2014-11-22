@@ -2,9 +2,10 @@
 #define ANGLEPLATFORM_H
 
 #include "Box2D\Box2D.h"
-#include "LTexture.h"
 #include "KeyboardManager.h"
 #include "ObjectFactory.h"
+#include <SDL_image.h>
+#include <SDL.h>
 
 class AnglePlatform {
 public:
@@ -19,7 +20,8 @@ private:
 	b2PolygonShape polyShape;
 	b2Fixture* mFix;
 	b2FixtureDef fixtureDef;
-	LTexture mTexture;
+	SDL_Texture * m_texture;
+	SDL_Rect rect;
 };
 
 #endif

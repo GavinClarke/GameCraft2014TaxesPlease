@@ -81,14 +81,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnglePlatform.cpp" />
+    <ClCompile Include="BasicPlatform.cpp" />
+    <ClCompile Include="Constants.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="KeyboardManager.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnglePlatform.h" />
+    <ClInclude Include="BasicPlatform.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="KeyboardManager.h" />
+    <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="ObjectFactory.h" />
   </ItemGroup>
   <ItemGroup>
