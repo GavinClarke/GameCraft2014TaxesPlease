@@ -6,7 +6,8 @@
 BasicPlatform::BasicPlatform(){}
 BasicPlatform::BasicPlatform(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position,b2Vec2 dimensions, float angleRadians) {
 	
-	m_texture.loadFromFile( "Platform.png", gRenderer );
+	mSize = dimensions;
+	m_texture = SDL_CreateTextureFromSurface( gRenderer, IMG_Load( "BasicPlatform.png"  ));
 	
 	staticBody = ObjectFactory::instance()->createPlatform(world, position, dimensions, angleRadians, b2_staticBody);
 	staticBody->SetUserData((void*)-2);
@@ -18,7 +19,15 @@ BasicPlatform::~BasicPlatform(){
 }
 
 void BasicPlatform::Draw(SDL_Renderer* gRenderer, b2Vec2 offset) { 
-	m_texture.render((staticBody->GetPosition().x * METRESTOPIXELS) - (m_texture.getWidth() / 2) - offset.x,
-		-(staticBody->GetPosition().y * METRESTOPIXELS) - (m_texture.getHeight() / 2) + offset.y, NULL, 
-		staticBody->GetAngle() * TORADIANS, NULL, SDL_FLIP_NONE, gRenderer );
+	//Render to screen
+	SDL_Rect stretchRect; 
+	//SDL_RenderDrawLine
+	float rotation = (staticBody->GetAngle()*180.0/3.14159265);
+
+	stretchRect.x = dynamicBody->GetPosition().x-(mSize.x/2.0f);
+	stretchRect.y = dynamicBody->GetPosition().y-(mSize.y/2.0f);
+
+	stretchRect.w = mSize.x; 
+	stretchRect.h = mSize.y;
+	SDL_RenderCopyEx ( gRenderer, m_texture, NULL, &stretchRect, rotation, NULL, SDL_RendererFlip::SDL_FLIP_NONE );
 }
