@@ -33,23 +33,11 @@ void Player::Update() {
 }
 
 void Player::moveLeft(){
-	if (dynamicBody->GetContactList()) {
-			dynamicBody->ApplyForceToCenter(b2Vec2(10,0),true);
-			dynamicBody->ApplyAngularImpulse(-0.1,true);
-		}
-		else {
 			dynamicBody->ApplyForceToCenter(b2Vec2(5,0),true);
-		}
 }
 
 void Player::moveRight(){
-	if (dynamicBody->GetContactList()) {
-			dynamicBody->ApplyForceToCenter(b2Vec2(-10,0),true);
-			dynamicBody->ApplyAngularImpulse(0.1,true);
-		}
-		else {
-			dynamicBody->ApplyForceToCenter(b2Vec2(-5,0),true);
-		}
+	dynamicBody->ApplyForceToCenter(b2Vec2(-5,0),true);
 }
 
 
