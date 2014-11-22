@@ -12,7 +12,7 @@ ObjectFactory* ObjectFactory::instance() {
 	return m_instance;
 }
 
-b2Body* ObjectFactory::createPlatform(b2World* world, b2Vec2 position, b2Vec2 dimensions, float angle, b2BodyType type) {
+b2Body* ObjectFactory::createPlatform(b2World* world, b2Vec2 position, b2Vec2 dimensions, float angle, b2BodyType type, float density) {
 	b2Body* box;
 	b2BodyDef boxDef;      
 	b2PolygonShape boxShape;
@@ -24,6 +24,7 @@ b2Body* ObjectFactory::createPlatform(b2World* world, b2Vec2 position, b2Vec2 di
 	box = world->CreateBody(&boxDef);
 	boxShape.SetAsBox((dimensions.x/2) * PIXELSTOMETRES, (dimensions.y/2) * PIXELSTOMETRES);
 	boxFixture.shape = &boxShape;
+	boxFixture.density = density;
 	box->CreateFixture(&boxFixture);
 
 	return box;
@@ -53,5 +54,14 @@ b2PrismaticJoint* ObjectFactory::createPrismaticJoint(b2World* world, b2Body* bo
 	revDef.Initialize(body1, body2, b2Vec2(position.x*PIXELSTOMETRES, -position.y*PIXELSTOMETRES), translation);
 	revDef.collideConnected = false;
 	joint = (b2PrismaticJoint*)world->CreateJoint(&revDef);
+	return joint;
+}
+
+b2WeldJoint* ObjectFactory::createWeldJoint(b2World* world, b2Body* body1, b2Body* body2, b2Vec2 position) {
+	b2WeldJoint* joint;
+	b2WeldJointDef revDef;
+	revDef.Initialize(body1, body2, b2Vec2(position.x*PIXELSTOMETRES, -position.y*PIXELSTOMETRES));
+	revDef.collideConnected = false;
+	joint = (b2WeldJoint*)world->CreateJoint(&revDef);
 	return joint;
 }
