@@ -7,6 +7,7 @@
 #include <SDL_mixer.h>
 #include "Game.h"
 #include "KeyboardManager.h"
+#include "Constants.h"
 //Screen dimension constants 
 const int SCREEN_WIDTH = 1280; 
 const int SCREEN_HEIGHT = 720;
@@ -16,9 +17,11 @@ SDL_Renderer* renderer = NULL;
 
 SDL_Event eHandler;
 Game* game;
+Constants * c;
 void gameLoop();
 int main(int argc, char **argv){
-	bool QUIT = true;
+	c =  new Constants();
+	c->QUIT = true;
 	
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
@@ -50,14 +53,14 @@ int main(int argc, char **argv){
 	b2Vec2 gravity =  b2Vec2(0.0f,4.981f);
 	bool doSleep = true;
 	b2World* world = new b2World(gravity);
-	game = new Game(renderer,world);
+	game = new Game(renderer,world,c);
 
 	double mClock = SDL_GetTicks();
-	while(QUIT){
-		/*KeyboardManager::getKeys()->Update(eHandler);
+	while(c->QUIT){
+		KeyboardManager::getKeys()->Update(eHandler);
 		double deltaTime = SDL_GetTicks() - mClock;
 		game->update(deltaTime/1000.0f);
-		mClock += deltaTime;*/
+		mClock += deltaTime;
 	}
 	SDL_Quit();
 
