@@ -16,10 +16,10 @@ public:
 	b2Vec2 GetPosition();
 	int count;
 	
+	b2Body* dynamicBody;
 	void Death();
 private:
 	b2BodyDef myBodyDef;
-	b2Body* dynamicBody;
 	b2PolygonShape playerShape;
 	b2Fixture* mFix;
 	b2FixtureDef fixtureDef;

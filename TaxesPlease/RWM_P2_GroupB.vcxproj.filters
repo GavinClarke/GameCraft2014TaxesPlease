@@ -17,7 +17,9 @@
     <ClCompile Include="PrismaticPlatform.cpp" />
     <ClCompile Include="RevolutePlatforms.cpp" />
     <ClCompile Include="SoundManager.cpp" />
-    <ClCompile Include="Semaphore.cpp" />
+    <ClCompile Include="Water.cpp" />
+    <ClCompile Include="entity.cpp" />
+    <ClCompile Include="EntityMangager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnglePlatform.h" />
@@ -35,6 +37,9 @@
     <ClInclude Include="PrismaticPlatform.h" />
     <ClInclude Include="RevolutePlatforms.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Water.h" />
+    <ClInclude Include="entity.h" />
+    <ClInclude Include="EntityMangager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="backGroundTest.png" />
