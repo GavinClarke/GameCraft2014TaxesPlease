@@ -17,6 +17,7 @@
     <ClCompile Include="PrismaticPlatform.cpp" />
     <ClCompile Include="RevolutePlatforms.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Semaphore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnglePlatform.h" />
