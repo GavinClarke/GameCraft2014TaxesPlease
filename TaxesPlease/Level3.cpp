@@ -8,10 +8,10 @@ private:
 public:
 	Level3(int count, b2World* w, SDL_Renderer* r)
 	{
-		m_platforms.push_back(new OneWayPlatform(w,r,b2Vec2(100 ,800 - (count * CONSTANTS::LEVEL_HEIGHT)),b2Vec2(300,60),0));
-		m_platforms.push_back(new OneWayPlatform(w,r,b2Vec2(300,600 -  (count * CONSTANTS::LEVEL_HEIGHT)),b2Vec2(300,60),0));
-		m_platforms.push_back(new OneWayPlatform(w,r,b2Vec2(450 ,400 - (count * CONSTANTS::LEVEL_HEIGHT)),b2Vec2(300,60),0));
-		m_platforms.push_back(new OneWayPlatform(w,r,b2Vec2(600 ,200 - (count * CONSTANTS::LEVEL_HEIGHT)),b2Vec2(300,60),0));
+		m_platforms.push_back(new OneWayPlatform(w,r,b2Vec2(100 ,800 - (count * CONSTANTS::LEVEL_HEIGHT)),0));
+		m_platforms.push_back(new OneWayPlatform(w,r,b2Vec2(300,600 -  (count * CONSTANTS::LEVEL_HEIGHT)),0));
+		m_platforms.push_back(new OneWayPlatform(w,r,b2Vec2(450 ,400 - (count * CONSTANTS::LEVEL_HEIGHT)),0));
+		m_platforms.push_back(new OneWayPlatform(w,r,b2Vec2(600 ,200 - (count * CONSTANTS::LEVEL_HEIGHT)),0));
 	}
 
 	~Level3()

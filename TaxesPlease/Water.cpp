@@ -5,7 +5,7 @@
 #include "Water.h"
 
 Water::Water(b2World* world, SDL_Renderer* gRenderer) {
-	mTexture.loadFromFile( "Water.png", gRenderer );
+	mTexture.loadFromFile( "waterParticle.png", gRenderer );
 
 	myBodyDef.type = b2_dynamicBody;
 	myBodyDef.fixedRotation = true;
@@ -68,9 +68,9 @@ void Water::Draw(SDL_Renderer* gRenderer, b2Vec2 offset) {
 		
 	}
 //	pS->ApplyLinearImpulse(0,5000,b2Vec2(0,200));
-	dynamicBody->SetLinearVelocity(b2Vec2(0, 1.5f));
-	leftBody->SetLinearVelocity(b2Vec2(0, 1.5f));
-	rightBody->SetLinearVelocity(b2Vec2(0, 1.5f));
+	dynamicBody->SetLinearVelocity(b2Vec2(0, 2.5f));
+	leftBody->SetLinearVelocity(b2Vec2(0, 2.5f));
+	rightBody->SetLinearVelocity(b2Vec2(0, 2.5f));
 }
 
 float Water::getYPos() {

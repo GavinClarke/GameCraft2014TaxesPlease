@@ -4,30 +4,58 @@
 
 #include "RevolutePlatforms.h"
 
-RevolutePlatforms::RevolutePlatforms(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 dimensions, float radius, float speed) {
-	size = dimensions;
-	m_texture = SDL_CreateTextureFromSurface( gRenderer, IMG_Load( "Platform.png") );
+RevolutePlatforms::RevolutePlatforms(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, float radius, float speed) {
+	mTexture.loadFromFile( "RevolutePlatform.png", gRenderer );
 
-	pivotPoint = ObjectFactory::instance()->createPlatform(world, position, b2Vec2(0.01,0.01), 0, b2_staticBody, 0.1f);
-	pivotPoint->SetUserData((void*)-2);
-	b2Filter f; f.groupIndex = -1; pivotPoint->GetFixtureList()[0].SetFilterData(f);
-	centre = ObjectFactory::instance()->createPlatform(world, position, b2Vec2(radius , 10), 0, b2_dynamicBody, 1.0f);
-	f.groupIndex = -1; pivotPoint->GetFixtureList()[0].SetFilterData(f);
-	f.groupIndex = -1; pivotPoint->GetFixtureList()[0].SetFilterData(f);
+	myBodyDef.userData = (void*)-2;
 
-	platformOne = ObjectFactory::instance()->createPlatform(world, position, dimensions, 0, b2_dynamicBody, 0.1f);
-	platformOne->SetFixedRotation(true);
+	myBodyDef.position.Set(position.x * PIXELSTOMETRES, -position.y * PIXELSTOMETRES);
+	pivotPoint = world->CreateBody(&myBodyDef);
+	polyShape.SetAsBox(0.01, 0.01);
+	fixtureDef.shape = &polyShape;
+	fixtureDef.density = 0.1f;
+	fixtureDef.filter.groupIndex = -1;
+	pivotPoint->CreateFixture(&fixtureDef);
+	
+	myBodyDef.type = b2_dynamicBody;
+	myBodyDef.position.Set(position.x * PIXELSTOMETRES, -position.y * PIXELSTOMETRES);
+	centre = world->CreateBody(&myBodyDef);
+	polyShape.SetAsBox(radius * PIXELSTOMETRES, 10*PIXELSTOMETRES);
+	fixtureDef.shape = &polyShape;
+	fixtureDef.density = 1.0f;
+	centre->CreateFixture(&fixtureDef);
 
-	platformTwo = ObjectFactory::instance()->createPlatform(world, b2Vec2(position.x + radius, position.y), dimensions, 0, b2_dynamicBody, 0.1f);
-	platformTwo->SetFixedRotation(true);
+	myBodyDef.position.Set((position.x - radius)*PIXELSTOMETRES, -position.y*PIXELSTOMETRES);
+	fixtureDef.filter.groupIndex = 0;
+	myBodyDef.fixedRotation = true;
+	platformOne = world->CreateBody(&myBodyDef);
+	polyShape.SetAsBox(mTexture.getWidth()/2*PIXELSTOMETRES, mTexture.getHeight()/2*PIXELSTOMETRES);
+	fixtureDef.shape = &polyShape;
+	fixtureDef.density = 0.1f;
+	platformOne->CreateFixture(&fixtureDef);
 
-	m_centreJoint = ObjectFactory::instance()->createRevoluteJoint(world, pivotPoint, centre, centre->GetWorldCenter());
-	m_centreJoint->EnableMotor(true);
-	m_centreJoint->SetMotorSpeed(speed);
-	m_centreJoint->SetMaxMotorTorque(1000);
+	myBodyDef.position.Set((position.x + radius)*PIXELSTOMETRES, -position.y*PIXELSTOMETRES);
+	platformTwo = world->CreateBody(&myBodyDef);
+	polyShape.SetAsBox(mTexture.getWidth()/2*PIXELSTOMETRES, mTexture.getHeight()/2*PIXELSTOMETRES);
+	fixtureDef.shape = &polyShape;
+	fixtureDef.density = 0.1f;
+	platformTwo->CreateFixture(&fixtureDef);
 
-	m_platformJoint1 = ObjectFactory::instance()->createRevoluteJoint(world, centre, platformOne, platformOne->GetWorldCenter());
-	m_platformJoint2 = ObjectFactory::instance()->createRevoluteJoint(world, centre, platformTwo, platformTwo->GetWorldCenter());
+	jD.Initialize(pivotPoint, centre, centre->GetWorldCenter());
+	jD.collideConnected = false;
+	jD.enableMotor = true;
+	jD.motorSpeed = speed * PIXELSTOMETRES;
+	jD.maxMotorTorque = 1000;
+	m_centreJoint = (b2RevoluteJoint*)world->CreateJoint(&jD);
+
+	jD.Initialize(centre, platformOne, platformOne->GetWorldCenter());
+	jD.enableMotor = false;
+	jD.collideConnected = false;
+	m_platformJoint1 = (b2RevoluteJoint*)world->CreateJoint(&jD);
+
+	jD.Initialize(centre, platformTwo, platformTwo->GetWorldCenter());
+	jD.collideConnected = false;
+	m_platformJoint2 = (b2RevoluteJoint*)world->CreateJoint(&jD);
 }
 
 RevolutePlatforms::~RevolutePlatforms() {
@@ -40,20 +68,12 @@ RevolutePlatforms::~RevolutePlatforms() {
 }
 
 void RevolutePlatforms::Draw(SDL_Renderer* gRenderer, b2Vec2 offset) { 
-	SDL_Rect stretchRect;
-	float rotation = platformOne->GetAngle() * TORADIANS;
+	mTexture.render((platformOne->GetPosition().x * METRESTOPIXELS) - (mTexture.getWidth() / 2) - offset.x,
+		-(platformOne->GetPosition().y * METRESTOPIXELS) - (mTexture.getHeight() / 2) + offset.y, NULL, 
+		platformOne->GetAngle() * TORADIANS, NULL, SDL_FLIP_NONE, gRenderer );
 
-	stretchRect.x = (platformOne->GetPosition().x ) - (size.x / 2) - offset.x;
-	stretchRect.y = (platformOne->GetPosition().y ) - (size.y / 2) + offset.y;
-	stretchRect.w = size.x;
-	stretchRect.h = size.y;
+	mTexture.render((platformTwo->GetPosition().x * METRESTOPIXELS) - (mTexture.getWidth() / 2) - offset.x,
+		-(platformTwo->GetPosition().y * METRESTOPIXELS) - (mTexture.getHeight() / 2) + offset.y, NULL, 
+		platformTwo->GetAngle() * TORADIANS, NULL, SDL_FLIP_NONE, gRenderer );
 
-	SDL_RenderCopyEx(gRenderer, m_texture, NULL, &stretchRect, rotation, NULL, SDL_FLIP_NONE);
-
-	stretchRect.x = (platformTwo->GetPosition().x ) - (size.x / 2) - offset.x;
-	stretchRect.y = (platformTwo->GetPosition().y ) - (size.y / 2) + offset.y;
-	stretchRect.w = size.x;
-	stretchRect.h = size.y;
-
-	SDL_RenderCopyEx(gRenderer, m_texture, NULL, &stretchRect, rotation, NULL, SDL_FLIP_NONE);
 }

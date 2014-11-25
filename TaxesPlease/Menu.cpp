@@ -1,12 +1,11 @@
 #include "Menu.h"
 
 
-Menu::Menu(SDL_Renderer * renderer,Constants * con)
+Menu::Menu(SDL_Renderer * renderer)
 {
 	
 	mRenderer = renderer;
 	LoadImage();
-	c = con;
 	playRect = SDL_Rect();
 	playRect.x = 0;
 	playRect.y = 0;
@@ -33,8 +32,9 @@ int Menu::Update()
 	}
 	else if(MouseClick(QuitRect))
 	{
-		c->QUIT = false;
+		return 0;
 	}
+	return 100;
 }
 
 void Menu::LoadImage()

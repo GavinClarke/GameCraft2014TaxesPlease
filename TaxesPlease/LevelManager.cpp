@@ -1,63 +1,114 @@
+#define  METRESTOPIXELS 30
+#define PIXELSTOMETRES 1/30.0f
+
 #include "LevelManager.h"
 
+using namespace std;
 
-LevelManager::LevelManager(b2World * world,SDL_Renderer * renderer)
+LevelManager::LevelManager(b2World* w, SDL_Renderer* r,Player* p)
 {
-	mRenderer = renderer;
-	plat = new BasicPlatform(world,renderer,b2Vec2(0,600),b2Vec2(800,50),0);
-	plat2 = new BasicPlatform(world,renderer,b2Vec2(0,350),b2Vec2(200,50),0);
-	plat3 = new BasicPlatform(world,renderer,b2Vec2(640,250),b2Vec2(200,50),0);
-	angPlat = new AnglePlatform(world,renderer,b2Vec2(640,400),b2Vec2(200,25),-0.5);
-	player = new Player(world,renderer,b2Vec2(50,550),b2Vec2(25,25));
-	Cam = b2Vec2(player->GetPosition().x - 640,player->GetPosition().y - 360); 
-	
-	water = IMG_LoadTexture(renderer,"images/Background.png");
-	SDL_Rect rect = SDL_Rect();
-	rect.x =0;
-	rect.y = 500;
-	rect.h = 100;
-	rect.w = 1280;
-	position = b2Vec2(650,100);
+	m_world = w;
+	m_player = p;
+	m_renderer = r;
+	srand ( time(NULL) );
 }
 
-
-LevelManager::~LevelManager(void)
+LevelManager::~LevelManager()
 {
-
 }
 
-void LevelManager::Update()
+void LevelManager::Initialize()
 {
-	player->Update();
-	position.x -= 0.01;
-	position.y+= 0.01;
-	CollisionWithWater();
-}
-
-void LevelManager::CreatePlatForms()
-{
-
-}
-
-void LevelManager::CollisionWithWater()
-{
-	if(player->GetPosition().y > position.x)
+	m_count = 0;
+	for (int i = 0; i < 4; i++)
 	{
-		player->Death();
+		m_levels[i] = CreateRandomLevel();
+		m_count++;  
+	}
+
+	m_previousLevel =  m_levels[0];
+	m_currentLevel = m_levels[1];
+	m_nextLevel1 = m_levels[2];
+	m_nextLevel2 = m_levels[3];
+}
+
+void LevelManager::Update(){
+	
+	if(m_nextLevel1 == GetCurrentLevel())
+	{
+		m_previousLevel->~Level();
+		
+		m_previousLevel = m_currentLevel;
+		m_currentLevel = m_nextLevel1;
+		m_nextLevel1 = m_nextLevel2;
+		m_nextLevel2 = CreateRandomLevel();
+		m_count++;
+	}
+
+	m_previousLevel->Update(m_player);
+	m_currentLevel->Update(m_player);
+	m_nextLevel1->Update(m_player);
+	m_nextLevel2->Update(m_player);
+}
+
+void LevelManager::Render(SDL_Renderer* r, b2Vec2 offset){
+	
+	m_previousLevel->Render(r,offset);
+	m_currentLevel->Render(r,offset);
+	m_nextLevel1->Render(r,offset);
+}
+
+Level* LevelManager::GetCurrentLevel()
+{
+	if (m_player->GetPosition().y * METRESTOPIXELS < (m_count -3) * CONSTANTS::LEVEL_HEIGHT)
+	{
+		return m_currentLevel;
+	}
+	else if(m_player->GetPosition().y * METRESTOPIXELS > (m_count  -3) * CONSTANTS::LEVEL_HEIGHT)
+	{
+		return m_nextLevel1;
 	}
 }
 
-void LevelManager::Draw()
+Level* LevelManager::CreateRandomLevel()
 {
-	plat->Draw(mRenderer,b2Vec2(0,0));
-	plat2->Draw(mRenderer,b2Vec2(0,0));
-	plat3->Draw(mRenderer,b2Vec2(0,0));
-	angPlat->Draw(mRenderer,b2Vec2(0,0));
-	player->Render(mRenderer,b2Vec2(0,0));
+	int newLevel = rand() % 9;
 
-	rect.x =0;
-	rect.y = position.x;
-	rect.h = position.y;
-	rect.w = 1280;
-	SDL_RenderCopy(mRenderer,water,NULL,&rect);
+	if (newLevel == 0)
+	{
+		return new Level1(m_count,m_world,m_renderer);
+	}
+	else if (newLevel == 1)
+	{
+		return new Level2(m_count,m_world,m_renderer);
+	}
+	else if (newLevel == 2)
+	{
+		return new Level3(m_count,m_world,m_renderer);
+	}
+	else if (newLevel == 3)
+	{
+		return new Level4(m_count, m_world, m_renderer);
+	}	
+	else if (newLevel == 4)
+	{
+		return new Level5(m_count, m_world, m_renderer);
+	}
+	else if (newLevel == 5)
+	{
+        return new Level6(m_count,m_world,m_renderer);
+	}
+	else if (newLevel == 6)
+	{
+		return new Level7(m_count,m_world,m_renderer);
+	}
+	else if (newLevel == 7)
+	{
+		return new Level8(m_count,m_world,m_renderer);
+	}
+	else if (newLevel == 8)
+	{
+		return new Level9(m_count, m_world, m_renderer);
+	}	
+
 }
