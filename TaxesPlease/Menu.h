@@ -6,6 +6,8 @@
 class Menu
 {
 public:
+	Constants * c;
+
 	SDL_Texture * Play;
 	SDL_Texture * Quit;
 
@@ -14,7 +16,7 @@ public:
 
 	SDL_Renderer * mRenderer;
 
-	Menu(SDL_Renderer * renderer);
+	Menu(SDL_Renderer * renderer,Constants * con);
 	~Menu(void);
 	int Update();
 	void LoadImage();

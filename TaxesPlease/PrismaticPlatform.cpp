@@ -4,35 +4,22 @@
 
 #include "PrismaticPlatform.h"
 
-PrismaticPlatform::PrismaticPlatform(b2World* world, SDL_Renderer* gRenderer, float leftBound, float rightBound, float yPosition, float speed)
+PrismaticPlatform::PrismaticPlatform(b2World* world, SDL_Renderer* gRenderer, float leftBound, float rightBound, float yPosition, float speed, b2Vec2 dimensions)
 	:m_rightBound(rightBound), m_leftBound(leftBound) {
-	mTexture.loadFromFile( "PrismaticPlatform.png", gRenderer );
+	//mTexture.loadFromFile( "PrismaticPlatform.png", gRenderer );
 
-	myBodyDef.userData = (void*)-2;
+	m_texture = SDL_CreateTextureFromSurface( gRenderer, IMG_Load( "PrismaticPlatform.png") );
 
-	myBodyDef.position.Set(leftBound * PIXELSTOMETRES, -yPosition * PIXELSTOMETRES);
-	anchor = world->CreateBody(&myBodyDef);
-	polyShape.SetAsBox(0.01, 0.01);
-	fixtureDef.shape = &polyShape;
-	fixtureDef.density = 0.1f;
-	fixtureDef.filter.groupIndex = -1;
-	anchor->CreateFixture(&fixtureDef);
-	
-	myBodyDef.type = b2_dynamicBody;
-	myBodyDef.position.Set(rightBound * PIXELSTOMETRES, -yPosition * PIXELSTOMETRES);
-	platform = world->CreateBody(&myBodyDef);
-	polyShape.SetAsBox((mTexture.getWidth()/2) * PIXELSTOMETRES, (mTexture.getHeight()/2) * PIXELSTOMETRES);
-	fixtureDef.shape = &polyShape;
-	fixtureDef.density = 1.0f;
-	fixtureDef.filter.groupIndex = 0;
-	platform->CreateFixture(&fixtureDef);
+	anchor = ObjectFactory::instance()->createPlatform(world, b2Vec2(leftBound, yPosition), b2Vec2(0.01, 0.01), 0, b2_staticBody, 0.1f);
+	anchor->SetUserData((void*)-2);
+	b2Filter f; f.groupIndex = -1; anchor->GetFixtureList()[0].SetFilterData(f);
 
-	jD.Initialize(anchor, platform, anchor->GetWorldCenter(), b2Vec2(1,0));
-	jD.collideConnected = false;
-	jD.enableMotor = true;
-	jD.motorSpeed = speed * PIXELSTOMETRES;
-	jD.maxMotorForce = 1000;
-	m_joint = (b2PrismaticJoint*)world->CreateJoint(&jD);
+	platform = ObjectFactory::instance()->createPlatform(world, b2Vec2(rightBound, yPosition), dimensions, 0, b2_dynamicBody, 1.0f);
+
+	m_joint = ObjectFactory::instance()->createPrismaticJoint(world, anchor, platform, anchor->GetWorldCenter(), b2Vec2(1,0));
+	m_joint->EnableMotor(true);
+	m_joint->SetMotorSpeed(speed);
+	m_joint->SetMaxMotorForce(1000);
 }
 
 PrismaticPlatform::~PrismaticPlatform() {
@@ -42,11 +29,17 @@ PrismaticPlatform::~PrismaticPlatform() {
 }
 
 void PrismaticPlatform::Draw(SDL_Renderer* gRenderer, b2Vec2 offset) { 
-	mTexture.render((platform->GetPosition().x * METRESTOPIXELS) - (mTexture.getWidth() / 2) - offset.x,
-		-(platform->GetPosition().y * METRESTOPIXELS) - (mTexture.getHeight() / 2) + offset.y, NULL, 
-		platform->GetAngle() * TORADIANS, NULL, SDL_FLIP_NONE, gRenderer );
+	SDL_Rect stretchRect;
+	float rotation = platform->GetAngle() * TORADIANS;
 
-	if (platform->GetPosition().x*METRESTOPIXELS > m_rightBound || platform->GetPosition().x*METRESTOPIXELS < m_leftBound) {
+	stretchRect.x = (platform->GetPosition().x ) - (size.x / 2) - offset.x;
+	stretchRect.y = -(platform->GetPosition().y ) - (size.y / 2) + offset.y;
+	stretchRect.w = size.x;
+	stretchRect.h = size.y;
+
+	SDL_RenderCopyEx(gRenderer, m_texture, NULL, &stretchRect, rotation, NULL, SDL_FLIP_NONE);
+
+	if (platform->GetPosition().x > m_rightBound || platform->GetPosition().x < m_leftBound) {
 		m_joint->SetMotorSpeed(m_joint->GetMotorSpeed()*-1);
 	}
 }

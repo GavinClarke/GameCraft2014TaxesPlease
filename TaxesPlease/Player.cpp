@@ -4,58 +4,76 @@
 
 #include "Player.h"
 
-Player::Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, float radius) : isSpaceDown(false) {
+Player::Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 dimentions) : isSpaceDown(false) {
 	myBodyDef.type = b2_dynamicBody;
-	myBodyDef.position.Set(position.x * PIXELSTOMETRES, -position.y * PIXELSTOMETRES);
-	myBodyDef.userData = (void*)0;myBodyDef.angularDamping = 2;
+	myBodyDef.position.Set(position.x , position.y );
+	myBodyDef.userData = (void*)0;
+	myBodyDef.angularDamping = 2;
 	dynamicBody = world->CreateBody(&myBodyDef);
-	circleShape.m_radius = radius * PIXELSTOMETRES;
-	fixtureDef.shape = &circleShape;
+	playerShape.SetAsBox(dimentions.x, dimentions.y);
+	fixtureDef.shape = &playerShape;
 	fixtureDef.filter.groupIndex = -1;
 	fixtureDef.density = 0.1;
 	dynamicBody->CreateFixture(&fixtureDef);
-
-	texture.loadFromFile( "Player.png", gRenderer );
-}
-
-void Player::Draw(SDL_Renderer* gRenderer, b2Vec2 offset) {
-	texture.render((dynamicBody->GetPosition().x * METRESTOPIXELS) - (texture.getWidth() / 2) - offset.x, 
-		-(dynamicBody->GetPosition().y * METRESTOPIXELS) - (texture.getWidth() / 2) + offset.y, 
-		NULL, dynamicBody->GetAngle() * TORADIANS, NULL, SDL_FLIP_NONE, gRenderer );
+	m_KeyboardMan = KeyboardManager::getKeys();
+	m_texture = IMG_LoadTexture(gRenderer,"images/player.png");
+	rect = SDL_Rect();
+	rect.h = dimentions.x*2;
+	rect.w = dimentions.y*2;
+	sm = new SoundManager();
+	sm->PlayBackground();
+	count = 0;
 }
 
 void Player::Update() {
-	if (KeyboardManager::instance()->IsKeyDown(KeyboardManager::D)) {
-		if (dynamicBody->GetContactList()) {
-			dynamicBody->ApplyForceToCenter(b2Vec2(10,0),true);
-			dynamicBody->ApplyAngularImpulse(-0.1,true);
-		}
-		else {
-			dynamicBody->ApplyForceToCenter(b2Vec2(5,0),true);
-		}
+	if (KeyboardManager::getKeys()->Key_Left) {
+		moveLeft();
 	}
-	else if (KeyboardManager::instance()->IsKeyDown(KeyboardManager::A)) {
-		if (dynamicBody->GetContactList()) {
-			dynamicBody->ApplyForceToCenter(b2Vec2(-10,0),true);
-			dynamicBody->ApplyAngularImpulse(0.1,true);
-		}
-		else {
-			dynamicBody->ApplyForceToCenter(b2Vec2(-5,0),true);
-		}
+	else if (KeyboardManager::getKeys()->Key_Right) {
+		moveRight();
 	}
-	if (KeyboardManager::instance()->IsKeyDown(KeyboardManager::SPACE)) {
-		if (dynamicBody->GetContactList() && !isSpaceDown) {
-			dynamicBody->ApplyLinearImpulse(b2Vec2(0,12.5), dynamicBody->GetPosition(), true);
-			isSpaceDown = true;
-		}
+	if (KeyboardManager::getKeys()->Key_Up) {
+		jump();
+		sm->PlayJumpSound();
 	}
-	else { isSpaceDown = false; }
+	else { count =0; }
 }
+
+void Player::moveLeft(){
+	dynamicBody->ApplyForce(b2Vec2(-5000,0),GetPosition(),true);
+}
+
+void Player::moveRight(){
+	dynamicBody->ApplyForce(b2Vec2(5000,0),GetPosition(),true);
+}
+
 
 b2Vec2 Player::GetPosition() {
 	return b2Vec2(dynamicBody->GetPosition().x, dynamicBody->GetPosition().y);
 }
 
-bool Player::CanCollideWithOneWayPlatforms(float yPos) {
-	return (dynamicBody->GetPosition().y - ((texture.getWidth() / 1.25) * PIXELSTOMETRES) <= yPos) ? true : false;
+void Player::Render(SDL_Renderer* gRenderer, b2Vec2 offset) {
+
+	rect.x = dynamicBody->GetPosition().x -(rect.w/2.0f)- offset.x;
+	rect.y = dynamicBody->GetPosition().y -(rect.h/2.0f)+ offset.y;
+	SDL_Rect h = SDL_Rect();
+	h.x =0;
+	h.y =0;
+	h.w = 165;
+	h.h = 230;
+	SDL_RenderCopy( gRenderer, m_texture, &h, &rect );
+}
+
+void Player::jump(){
+	if(count <=3)
+	{
+		dynamicBody->ApplyLinearImpulse(b2Vec2(0,-1200), dynamicBody->GetPosition(), true);
+		count ++;
+	}
+}
+
+void Player::Death()
+{
+	sm->PauseBackground(true);
+	sm->PlayDeathSound();
 }

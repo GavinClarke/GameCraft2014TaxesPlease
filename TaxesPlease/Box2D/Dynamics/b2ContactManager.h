@@ -25,14 +25,11 @@ class b2Contact;
 class b2ContactFilter;
 class b2ContactListener;
 class b2BlockAllocator;
-class b2ParticleSystem;
 
 // Delegate of b2World.
 class b2ContactManager
 {
 public:
-	friend class b2ParticleSystem;
-
 	b2ContactManager();
 
 	// Broad-phase callback.

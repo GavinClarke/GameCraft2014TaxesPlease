@@ -1,6 +1,5 @@
 /*
 * Copyright (c) 2006-2011 Erin Catto http://www.box2d.org
-* Copyright (c) 2014 Google, Inc.
 *
 * This software is provided 'as-is', without any express or implied
 * warranty.  In no event will the authors be held liable for any damages
@@ -43,7 +42,6 @@ struct b2TimeStep
 	float32 dtRatio;	// dt * inv_dt0
 	int32 velocityIterations;
 	int32 positionIterations;
-	int32 particleIterations;
 	bool warmStarting;
 };
 

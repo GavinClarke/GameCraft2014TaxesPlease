@@ -18,11 +18,11 @@ b2Body* ObjectFactory::createPlatform(b2World* world, b2Vec2 position, b2Vec2 di
 	b2PolygonShape boxShape;
 	b2FixtureDef boxFixture;
 
-	boxDef.position.Set(position.x  * PIXELSTOMETRES, -position.y  * PIXELSTOMETRES);
+	boxDef.position.Set(position.x , position.y );
 	boxDef.type = type;
 	boxDef.angle = angle;
 	box = world->CreateBody(&boxDef);
-	boxShape.SetAsBox((dimensions.x/2) * PIXELSTOMETRES, (dimensions.y/2) * PIXELSTOMETRES);
+	boxShape.SetAsBox(dimensions.x, (dimensions.y/2) * PIXELSTOMETRES);
 	boxFixture.shape = &boxShape;
 	boxFixture.density = density;
 	box->CreateFixture(&boxFixture);
