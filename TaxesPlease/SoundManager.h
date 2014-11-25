@@ -18,5 +18,8 @@ private:
 	Mix_Chunk* death;//death sound
 	Mix_Chunk* menu;//button press sound
 
+	//The protective semaphore 
+	SDL_sem *soundLock;
+
 };
 

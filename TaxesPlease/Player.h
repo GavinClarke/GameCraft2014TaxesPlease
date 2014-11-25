@@ -6,6 +6,7 @@
 #include "Box2D/Box2D.h"
 #include "KeyboardManager.h"
 #include "SoundManager.h"
+#include <SDL_thread.h>
 
 class Player {
 public:
@@ -31,6 +32,12 @@ private:
 	void moveLeft();
 	void moveRight();
 	void jump();
+
+	//The thread that will be used 
+	SDL_Thread *thread;
+
+	//The protective semaphore 
+	SDL_sem *Lock;
 };
 
 #endif

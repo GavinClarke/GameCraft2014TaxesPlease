@@ -23,11 +23,15 @@ Player::Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 
 	sm = new SoundManager();
 	sm->PlayBackground();
 	count = 0;
+
+	//thread = SDL_CreateThread( Player::moveLeft, this );
+	thread = NULL;
+	Lock = SDL_CreateSemaphore( 1 );
 }
 
 void Player::Update() {
 	if (KeyboardManager::getKeys()->Key_Left) {
-		moveLeft();
+		thread = SDL_CreateThread( &Player::moveLeft, NULL, this );//moveLeft();
 	}
 	else if (KeyboardManager::getKeys()->Key_Right) {
 		moveRight();
@@ -40,16 +44,28 @@ void Player::Update() {
 }
 
 void Player::moveLeft(){
+	//Lock 
+	SDL_SemWait( Lock );
 	dynamicBody->ApplyForce(b2Vec2(-5000,0),GetPosition(),true);
+	//Unlock 
+	SDL_SemPost( Lock );
 }
 
 void Player::moveRight(){
+	//Lock 
+	SDL_SemWait( Lock );
 	dynamicBody->ApplyForce(b2Vec2(5000,0),GetPosition(),true);
+	//Unlock 
+	SDL_SemPost( Lock );
 }
 
 
 b2Vec2 Player::GetPosition() {
+	//Lock 
+	SDL_SemWait( Lock );
 	return b2Vec2(dynamicBody->GetPosition().x, dynamicBody->GetPosition().y);
+	//Unlock 
+	SDL_SemPost( Lock );
 }
 
 void Player::Render(SDL_Renderer* gRenderer, b2Vec2 offset) {

@@ -8,6 +8,7 @@ SoundManager::SoundManager(void)
 	background = Mix_LoadMUS("sfx/Background.wav");
 	death = Mix_LoadWAV("sfx/Death.wav");
 	menu = Mix_LoadWAV("sfx/MenuBeep");
+	videoLock = NULL;
 }
 
 
