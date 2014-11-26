@@ -1,38 +1,27 @@
-﻿Build started 24/11/2014 11:35:41.
+﻿Build started 26/11/2014 16:37:38.
      1>Project "C:\Users\Gavin\Desktop\gameCraftGit\TaxesPlease\RWM_P2_GroupB.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I./ /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt entity.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I./ /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp LevelManager.cpp Main.cpp Water.cpp entity.cpp
          entity.cpp
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(26): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(27): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
      1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(28): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
      1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(29): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(34): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(35): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(30): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(31): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
      1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(36): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
      1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(37): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Gavin\Desktop\gameCraftGit\TaxesPlease\Debug\RWM_P2_GroupB.exe" /INCREMENTAL /NOLOGO /LIBPATH:./lib SDL2_ttf.lib Box2D.lib SDL2.lib SDL2main.lib SDL2_image.lib SDL2_Mixer.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Gavin\Desktop\gameCraftGit\TaxesPlease\Debug\RWM_P2_GroupB.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Gavin\Desktop\gameCraftGit\TaxesPlease\Debug\RWM_P2_GroupB.lib" /MACHINE:X86 Debug\AnglePlatform.obj
-         Debug\BasicPlatform.obj
-         Debug\Constants.obj
-         Debug\ContactListener.obj
-         Debug\entity.obj
-         Debug\FallingPlatform.obj
-         Debug\Game.obj
-         Debug\KeyboardManager.obj
-         Debug\LevelManager.obj
-         Debug\Main.obj
-         Debug\Menu.obj
-         Debug\ObjectFactory.obj
-         Debug\OneWayPlatform.obj
-         Debug\Player.obj
-         Debug\PrismaticPlatform.obj
-         Debug\RevolutePlatforms.obj
-         Debug\SoundManager.obj
-         Debug\Water.obj
-         RWM_P2_GroupB.vcxproj -> C:\Users\Gavin\Desktop\gameCraftGit\TaxesPlease\Debug\RWM_P2_GroupB.exe
-     1>Done Building Project "C:\Users\Gavin\Desktop\gameCraftGit\TaxesPlease\RWM_P2_GroupB.vcxproj" (Build target(s)).
+     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(38): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(39): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+         LevelManager.cpp
+     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\objectfactory.h(23): warning C4091: 'static ' : ignored on left of 'ObjectFactory' when no variable is declared
+     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\levelmanager.cpp(15): error C2664: 'SDL_CreateThread' : cannot convert parameter 1 from 'void' to 'SDL_ThreadFunction'
+                 Expressions of type void cannot be converted to other types
+         Generating Code...
+         Skipping... (no relevant changes detected)
+         Water.cpp
+         Main.cpp
+         Game.cpp
+     1>Done Building Project "C:\Users\Gavin\Desktop\gameCraftGit\TaxesPlease\RWM_P2_GroupB.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:01.05
+Time Elapsed 00:00:01.32

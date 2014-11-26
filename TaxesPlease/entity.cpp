@@ -4,6 +4,8 @@
 entity::entity(SDL_Renderer * renderer, int i)
 {
 	mRenderer = renderer;
+	MAX = 4;
+	ticket = new int[MAX];
 }
 
 entity::~entity()
@@ -47,7 +49,7 @@ void entity::CallDraw()
 	while(true)
 	{
 		Lock(m_id);
-		Draw(m_id);
+		Draw();
 		Unlock(m_id);
 	}
 }
@@ -56,7 +58,7 @@ void entity::Lock(int pid)
 {
 	ticket[pid] = getMax(ticket) + 1;
 
-	for(int i =0; i < max; i++)
+	for (int i = 0; i < MAX; i++)
 		if(i != pid)
 		{
 			

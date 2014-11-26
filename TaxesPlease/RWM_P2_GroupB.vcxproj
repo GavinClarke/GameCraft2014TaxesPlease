@@ -86,7 +86,6 @@
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="entity.cpp" />
-    <ClCompile Include="EntityMangager.cpp" />
     <ClCompile Include="FallingPlatform.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="KeyboardManager.cpp" />
@@ -107,7 +106,6 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ContactListener.h" />
     <ClInclude Include="entity.h" />
-    <ClInclude Include="EntityMangager.h" />
     <ClInclude Include="FallingPlatform.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="KeyboardManager.h" />

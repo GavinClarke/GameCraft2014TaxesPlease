@@ -13,9 +13,17 @@ private:
 	SDL_Renderer * mRenderer;
 	float rotation;
 	int m_id;
-	const int max = 4;
-    static int ticket [max];
-
+	int MAX;
+    static int * ticket;
+	/*public synchronized int  FA( int value)
+	{
+		 
+		int temp = this.number;
+		this.number = this.number + value;
+		
+		return temp;
+			
+	}*/
 public:
 	entity(SDL_Renderer * renderer, int i);
 	~entity();
@@ -29,5 +37,7 @@ public:
 
 	void Lock(int pid);
 	void Unlock(int pid);
+
+	int getMax(int * ticketA);
 };
 

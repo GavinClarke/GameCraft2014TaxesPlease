@@ -12,7 +12,7 @@ LevelManager::LevelManager(b2World * world,SDL_Renderer * renderer)
 	Cam = b2Vec2(player->GetPosition().x - 640,player->GetPosition().y - 360); 
 	
 	CreateObjects();
-
+	test = SDL_CreateThread((SDL_ThreadFunction)(platEntity->CallDraw()), "entity::CallDraw",NULL);
 	SDL_Rect rect = SDL_Rect();
 	rect.x =0;
 	rect.y = 650;
