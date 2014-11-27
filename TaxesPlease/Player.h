@@ -40,10 +40,10 @@ private:
 	
 
 	//The thread that will be used 
-	SDL_Thread *thread;
+	/*SDL_Thread *thread;
 	SDL_Thread *thread2;
 	SDL_Thread *thread3;
-
+*/
 	//The protective semaphore 
 	SDL_sem *Lock;
 };
