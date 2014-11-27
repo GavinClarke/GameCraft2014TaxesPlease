@@ -22,9 +22,10 @@ Constants * c;
 void gameLoop();
 int CallPlatEnt(void * data)
 {
-	game->level->angEntity->CallDraw();
+	game->level->platEntity->CallDraw();
 	return 0;
 }
+
 int main(int argc, char **argv){
 	c =  new Constants();
 	c->QUIT = true;
@@ -66,6 +67,7 @@ int main(int argc, char **argv){
 	SDL_Thread *thread = SDL_CreateThread(&CallPlatEnt, NULL, NULL);
 	
 	while(c->QUIT){
+		//thread->join();
 		KeyboardManager::getKeys()->Update(eHandler);
 		double deltaTime = SDL_GetTicks() - mClock;
 		game->update(deltaTime/1000.0f);
