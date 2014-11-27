@@ -1,27 +1,12 @@
-﻿Build started 26/11/2014 16:37:38.
-     1>Project "C:\Users\Gavin\Desktop\gameCraftGit\TaxesPlease\RWM_P2_GroupB.vcxproj" on node 2 (Build target(s)).
+﻿Build started 27/11/2014 00:03:28.
+     1>Project "C:\Users\gavin\Desktop\taxPease\TaxesPlease\RWM_P2_GroupB.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I./ /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp LevelManager.cpp Main.cpp Water.cpp entity.cpp
-         entity.cpp
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(28): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(29): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(30): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(31): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(36): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(37): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(38): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\entity.cpp(39): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I./ /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt LevelManager.cpp
          LevelManager.cpp
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\objectfactory.h(23): warning C4091: 'static ' : ignored on left of 'ObjectFactory' when no variable is declared
-     1>c:\users\gavin\desktop\gamecraftgit\taxesplease\levelmanager.cpp(15): error C2664: 'SDL_CreateThread' : cannot convert parameter 1 from 'void' to 'SDL_ThreadFunction'
-                 Expressions of type void cannot be converted to other types
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         Water.cpp
-         Main.cpp
-         Game.cpp
-     1>Done Building Project "C:\Users\Gavin\Desktop\gameCraftGit\TaxesPlease\RWM_P2_GroupB.vcxproj" (Build target(s)) -- FAILED.
+     1>c:\users\gavin\desktop\taxpease\taxesplease\objectfactory.h(23): warning C4091: 'static ' : ignored on left of 'ObjectFactory' when no variable is declared
+     1>c:\users\gavin\desktop\taxpease\taxesplease\levelmanager.cpp(15): error C3867: 'entity::CallDraw': function call missing argument list; use '&entity::CallDraw' to create a pointer to member
+     1>Done Building Project "C:\Users\gavin\Desktop\taxPease\TaxesPlease\RWM_P2_GroupB.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:01.32
+Time Elapsed 00:00:00.89

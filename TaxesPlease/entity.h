@@ -28,7 +28,7 @@ public:
 	entity(SDL_Renderer * renderer, int i);
 	~entity();
 	void LoadImage();
-	void CallDraw();
+	int CallDraw(void * data);
 	void Draw();
 	void setTextureName(std::string value);
 	void setSizeRect(float x, float y, float h, float w);

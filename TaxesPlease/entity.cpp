@@ -44,7 +44,7 @@ void entity::setRotation(float value)
 	rotation = value;
 }
 
-void entity::CallDraw()
+int entity::CallDraw(void * data)
 {
 	while(true)
 	{
@@ -52,6 +52,7 @@ void entity::CallDraw()
 		Draw();
 		Unlock(m_id);
 	}
+	return 0;
 }
 
 void entity::Lock(int pid)
