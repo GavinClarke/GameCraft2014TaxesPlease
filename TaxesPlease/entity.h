@@ -14,7 +14,6 @@ private:
 	float rotation;
 	int m_id;
 	int MAX;
-    static int * ticket;
 	/*public synchronized int  FA( int value)
 	{
 		 
@@ -25,19 +24,20 @@ private:
 			
 	}*/
 public:
-	entity(SDL_Renderer * renderer, int i);
+	entity(SDL_Renderer * renderer, int i,int * tickets);
 	~entity();
+
+	int * ticket;
 	void LoadImage();
-	int CallDraw(void * data);
+	
 	void Draw();
 	void setTextureName(std::string value);
 	void setSizeRect(float x, float y, float h, float w);
 	void setImageSourceRect(float x, float y, float h, float w);
 	void setRotation(float value);
-
 	void Lock(int pid);
 	void Unlock(int pid);
-
 	int getMax(int * ticketA);
+	int CallDraw();
 };
 

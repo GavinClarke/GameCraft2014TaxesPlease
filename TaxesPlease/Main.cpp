@@ -20,6 +20,11 @@ SDL_Event eHandler;
 Game* game;
 Constants * c;
 void gameLoop();
+int CallPlatEnt(void * data)
+{
+	game->level->angEntity->CallDraw();
+	return 0;
+}
 int main(int argc, char **argv){
 	c =  new Constants();
 	c->QUIT = true;
@@ -58,6 +63,8 @@ int main(int argc, char **argv){
 	game = new Game(renderer,world,c);
 
 	double mClock = SDL_GetTicks();
+	SDL_Thread *thread = SDL_CreateThread(&CallPlatEnt, NULL, NULL);
+	
 	while(c->QUIT){
 		KeyboardManager::getKeys()->Update(eHandler);
 		double deltaTime = SDL_GetTicks() - mClock;

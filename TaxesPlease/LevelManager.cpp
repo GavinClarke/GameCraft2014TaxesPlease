@@ -11,8 +11,16 @@ LevelManager::LevelManager(b2World * world,SDL_Renderer * renderer)
 	player = new Player(world,renderer,b2Vec2(50,550),b2Vec2(25,25));
 	Cam = b2Vec2(player->GetPosition().x - 640,player->GetPosition().y - 360); 
 	
+	ticket = new int[4];
+	for (int i = 0; i < 4; i++)
+	{
+		ticket[i] = i;
+	}
+
 	CreateObjects();
-	test = SDL_CreateThread(platEntity->CallDraw,"CallDraw",NULL);
+	
+	
+	
 	SDL_Rect rect = SDL_Rect();
 	rect.x =0;
 	rect.y = 650;
@@ -23,34 +31,34 @@ LevelManager::LevelManager(b2World * world,SDL_Renderer * renderer)
 
 void LevelManager::CreateObjects()
 {
-	water = new entity(mRenderer,0);//IMG_LoadTexture(renderer,"images/Background.png");
+	water = new entity(mRenderer,0,ticket);//IMG_LoadTexture(renderer,"images/Background.png");
 	water->setTextureName("images/BackGround.png");
 	water->setRotation(0.0f);
 	water->setImageSourceRect(0, 0, 780, 1280);
 	water->LoadImage();
 
-	platEntity = new entity(mRenderer,1);
+	platEntity = new entity(mRenderer, 1, ticket);
 	platEntity->setTextureName("images/pipePlatform.png");
 	platEntity->setRotation(0.0f);
 	platEntity->setImageSourceRect(0, 0, 22, 96);
 	platEntity->setSizeRect(0,0,50,800);
 	platEntity->LoadImage();
 
-	plat2Entity = new entity(mRenderer,2);
+	plat2Entity = new entity(mRenderer, 2, ticket);
 	plat2Entity->setTextureName("images/pipePlatform.png");
 	plat2Entity->setRotation(0.0f);
 	plat2Entity->setImageSourceRect(0, 0, 22, 96);
 	plat2Entity->setSizeRect(0,0,50,400);
 	plat2Entity->LoadImage();
 
-	plat3Entity = new entity(mRenderer,2);
+	plat3Entity = new entity(mRenderer, 3, ticket);
 	plat3Entity->setTextureName("images/pipePlatform.png");
 	plat3Entity->setRotation(0.0f);
 	plat3Entity->setImageSourceRect(0, 0, 22, 96);
 	plat3Entity->setSizeRect(0,0,50,400);
 	plat3Entity->LoadImage();
 
-	angEntity = new entity(mRenderer,3);
+	angEntity = new entity(mRenderer, 4, ticket);
 	angEntity->setTextureName("images/pipePlatform.png");
 	angEntity->setRotation(-0.5f);
 	angEntity->setImageSourceRect(0, 0, 22, 96);
@@ -103,7 +111,7 @@ void LevelManager::Draw()
 	//plat3->Draw(mRenderer,b2Vec2(0,0));
 	//angPlat->Draw(mRenderer,b2Vec2(0,0));
 	player->Render(mRenderer,b2Vec2(0,0));
-	platEntity->Draw();
+	//platEntity->Draw();
 	plat2Entity->Draw();
 	plat3Entity->Draw();
 	angEntity->Draw();

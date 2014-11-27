@@ -1,11 +1,12 @@
 #include "entity.h"
 
 
-entity::entity(SDL_Renderer * renderer, int i)
+entity::entity(SDL_Renderer * renderer, int i, int * tickets)
 {
 	mRenderer = renderer;
 	MAX = 4;
-	ticket = new int[MAX];
+	ticket = tickets;
+	m_id = i;
 }
 
 entity::~entity()
@@ -44,7 +45,8 @@ void entity::setRotation(float value)
 	rotation = value;
 }
 
-int entity::CallDraw(void * data)
+
+int entity::CallDraw()
 {
 	while(true)
 	{
@@ -75,6 +77,19 @@ void entity::Lock(int pid)
 void entity::Unlock(int pid)
 {
 	ticket[pid] = 0;
+}
+
+int entity::getMax(int * ticketA)
+{
+	int current = 0;
+	for (int i = 0; i < MAX; i++)
+	{
+		if (ticketA[i] >= current)
+		{
+			current = ticketA[i];
+		}
+	}
+	return current;
 }
 
 void entity::Draw()
