@@ -25,47 +25,55 @@ Player::Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 
 	count = 0;
 
 	//thread = SDL_CreateThread( Player::moveLeft, this );
-	thread = NULL;
+	//thread = NULL;
 	Lock = SDL_CreateSemaphore( 1 );
+	
+	//thread = SDL_CreateThread( &Player::moveLeft, NULL, NULL);//&Player::moveLeft
+	//thread2 = SDL_CreateThread( std::ref(this->moveRight), NULL, this);
+	//thread3 = SDL_CreateThread(std::ref(this->jump), NULL, this);
 }
 
 void Player::Update() {
 	if (KeyboardManager::getKeys()->Key_Left) {
-		thread = SDL_CreateThread( &Player::moveLeft, NULL, this );//moveLeft();
+		//thread = SDL_CreateThread( &Player::moveLeft, NULL, this );//moveLeft();
 	}
 	else if (KeyboardManager::getKeys()->Key_Right) {
-		moveRight();
+		//moveRight();
 	}
 	if (KeyboardManager::getKeys()->Key_Up) {
-		jump();
-		sm->PlayJumpSound();
+		//jump();
+		//sm->PlayJumpSound();
 	}
 	else { count =0; }
 }
 
 void Player::moveLeft(){
+	if (KeyboardManager::getKeys()->Key_Left) {
 	//Lock 
 	SDL_SemWait( Lock );
 	dynamicBody->ApplyForce(b2Vec2(-5000,0),GetPosition(),true);
 	//Unlock 
 	SDL_SemPost( Lock );
+	}
 }
 
 void Player::moveRight(){
+	if (KeyboardManager::getKeys()->Key_Right) {
 	//Lock 
 	SDL_SemWait( Lock );
 	dynamicBody->ApplyForce(b2Vec2(5000,0),GetPosition(),true);
 	//Unlock 
 	SDL_SemPost( Lock );
+	}
 }
 
 
 b2Vec2 Player::GetPosition() {
 	//Lock 
-	SDL_SemWait( Lock );
+	//SDL_SemWait( Lock );
 	return b2Vec2(dynamicBody->GetPosition().x, dynamicBody->GetPosition().y);
 	//Unlock 
-	SDL_SemPost( Lock );
+	//SDL_SemPost( Lock );
 }
 
 void Player::Render(SDL_Renderer* gRenderer, b2Vec2 offset) {
@@ -81,10 +89,14 @@ void Player::Render(SDL_Renderer* gRenderer, b2Vec2 offset) {
 }
 
 void Player::jump(){
-	if(count <=3)
-	{
-		dynamicBody->ApplyLinearImpulse(b2Vec2(0,-1200), dynamicBody->GetPosition(), true);
-		count ++;
+	if (KeyboardManager::getKeys()->Key_Up) {
+		SDL_SemWait( Lock );
+		if(count <=3)
+		{
+			dynamicBody->ApplyLinearImpulse(b2Vec2(0,-1200), dynamicBody->GetPosition(), true);
+			count ++;
+		}
+		SDL_SemPost( Lock );
 	}
 }
 

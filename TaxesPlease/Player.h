@@ -9,6 +9,11 @@
 #include <SDL_thread.h>
 
 class Player {
+protected:
+	/*static void StaticThreadProc(void* pParam)
+   {
+	   return ((Player*)pParam)->moveLeft();
+   }*/
 public:
 	Player(b2World* world, SDL_Renderer* gRenderer, b2Vec2 position, b2Vec2 dimentions);
 	~Player();
@@ -16,8 +21,11 @@ public:
 	void Update();
 	b2Vec2 GetPosition();
 	int count;
-	
+	void moveLeft();
+	void moveRight();
+	void jump();
 	void Death();
+	
 private:
 	b2BodyDef myBodyDef;
 	b2Body* dynamicBody;
@@ -29,12 +37,12 @@ private:
 	SoundManager* sm;
 	bool isSpaceDown;
 	KeyboardManager* m_KeyboardMan;
-	void moveLeft();
-	void moveRight();
-	void jump();
+	
 
 	//The thread that will be used 
 	SDL_Thread *thread;
+	SDL_Thread *thread2;
+	SDL_Thread *thread3;
 
 	//The protective semaphore 
 	SDL_sem *Lock;

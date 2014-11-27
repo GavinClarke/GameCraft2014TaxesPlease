@@ -9,6 +9,9 @@
 #include "KeyboardManager.h"
 #include "Constants.h"
 #include "ContactListener.h"
+#include <string>
+#include <SDL_thread.h>
+
 //Screen dimension constants 
 const int SCREEN_WIDTH = 1280; 
 const int SCREEN_HEIGHT = 720;
@@ -18,11 +21,31 @@ SDL_Renderer* renderer = NULL;
 
 SDL_Event eHandler;
 Game* game;
-Constants * c;
+Constants * c =  new Constants();
 void gameLoop();
+SDL_Thread *threadLeft = NULL;
+SDL_Thread *threadRight = NULL;
+SDL_Thread *threadjump = NULL;
+
+int my_thread_left( void *data ) {
+	game->level->player->moveLeft();
+	return 0;
+}
+
+int my_thread_right( void *data ) {
+	game->level->player->moveRight();
+	return 0;
+}
+
+int my_thread_jump( void *data ) {
+	game->level->player->jump();
+	return 0;
+}
+
 int main(int argc, char **argv){
 	c =  new Constants();
 	c->QUIT = true;
+
 	
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
@@ -59,6 +82,10 @@ int main(int argc, char **argv){
 
 	double mClock = SDL_GetTicks();
 	while(c->QUIT){
+		threadLeft = SDL_CreateThread(my_thread_left, NULL, NULL);
+		threadRight = SDL_CreateThread(my_thread_right, NULL, NULL);
+		threadjump = SDL_CreateThread(my_thread_jump, NULL, NULL);
+
 		KeyboardManager::getKeys()->Update(eHandler);
 		double deltaTime = SDL_GetTicks() - mClock;
 		game->update(deltaTime/1000.0f);

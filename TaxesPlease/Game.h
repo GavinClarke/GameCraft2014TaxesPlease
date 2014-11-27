@@ -14,9 +14,10 @@ private:
 	Menu * menu;
 	Constants * c;
 	bool runGame;
-	LevelManager * level;
+	
 
 public:
+	LevelManager * level;
 	Game(SDL_Renderer* renderer, b2World* bworld,Constants * con);
 	~Game(void);
 	void update(double deltaTime);
