@@ -8,9 +8,11 @@ public:
 	Pickup(void);
 	~Pickup(void);
 	Pickup(b2World*, b2Vec2, SDL_Renderer*);
-	
+	void InitPickup(b2World*, b2Vec2, SDL_Renderer*);
+	int Run(void*);
+	b2Body* GetBody();
 	void SetAlive(bool isAlive);
-	void Draw(SDL_Renderer* gRenderer, b2Vec2 offset);
+	void Draw(SDL_Renderer* gRenderer);
 
 private:
 	b2BodyDef m_bodyDef;

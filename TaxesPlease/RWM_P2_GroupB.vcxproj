@@ -93,6 +93,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="OneWayPlatform.cpp" />
+    <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PrismaticPlatform.cpp" />
     <ClCompile Include="RevolutePlatforms.cpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="OneWayPlatform.h" />
+    <ClInclude Include="Pickup.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PrismaticPlatform.h" />
     <ClInclude Include="RevolutePlatforms.h" />
