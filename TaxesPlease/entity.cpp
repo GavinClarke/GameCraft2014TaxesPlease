@@ -1,12 +1,13 @@
 #include "entity.h"
 
 
-entity::entity(SDL_Renderer * renderer, int i, int * tickets)
+entity::entity(SDL_Renderer * renderer, int i, int * tickets,SDL_mutex * l)
 {
 	mRenderer = renderer;
 	MAX = 4;
 	ticket = tickets;
 	m_id = i;
+	lock = l;
 }
 
 entity::~entity()
@@ -48,13 +49,38 @@ void entity::setRotation(float value)
 
 int entity::CallDraw()
 {
+	
+	
 	while(true)
 	{
-		Lock(m_id);
+		SDL_RenderClear( mRenderer );
+		LockTwo();
 		Draw();
-		Unlock(m_id);
+		UnlockTwo();
+		
 	}
+	
 	return 0;
+}
+
+void entity::LockTwo()
+{
+	//lock
+	SDL_LockMutex(lock);
+}
+
+void entity::UnlockTwo()
+{
+	SDL_UnlockMutex( lock );
+	(*count) ++;
+	int n = 5;
+	int f = (*count);
+	while((*count) < n)
+	{
+
+	}
+	SDL_RenderPresent( mRenderer );
+	(*count) = 0;
 }
 
 void entity::Lock(int pid)

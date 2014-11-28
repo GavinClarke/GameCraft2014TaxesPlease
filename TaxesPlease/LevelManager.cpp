@@ -16,7 +16,8 @@ LevelManager::LevelManager(b2World * world,SDL_Renderer * renderer)
 	{
 		ticket[i] = i;
 	}
-
+	lock = SDL_CreateMutex();
+	count =new int (0);
 	CreateObjects();
 	
 	
@@ -27,43 +28,49 @@ LevelManager::LevelManager(b2World * world,SDL_Renderer * renderer)
 	rect.h = 100;
 	rect.w = 1280;
 	position = b2Vec2(650,100);
+	
 }
 
 void LevelManager::CreateObjects()
 {
-	water = new entity(mRenderer,0,ticket);//IMG_LoadTexture(renderer,"images/Background.png");
+	water = new entity(mRenderer,0,ticket,lock);//IMG_LoadTexture(renderer,"images/Background.png");
 	water->setTextureName("images/BackGround.png");
 	water->setRotation(0.0f);
 	water->setImageSourceRect(0, 0, 780, 1280);
 	water->LoadImage();
+	water->count = count;
 
-	platEntity = new entity(mRenderer, 1, ticket);
+	platEntity = new entity(mRenderer, 1, ticket,lock);
 	platEntity->setTextureName("images/pipePlatform.png");
 	platEntity->setRotation(0.0f);
 	platEntity->setImageSourceRect(0, 0, 22, 96);
 	platEntity->setSizeRect(0,0,50,800);
 	platEntity->LoadImage();
+	platEntity->count = count;
 
-	plat2Entity = new entity(mRenderer, 2, ticket);
+	plat2Entity = new entity(mRenderer, 2, ticket,lock);
 	plat2Entity->setTextureName("images/pipePlatform.png");
 	plat2Entity->setRotation(0.0f);
 	plat2Entity->setImageSourceRect(0, 0, 22, 96);
 	plat2Entity->setSizeRect(0,0,50,400);
 	plat2Entity->LoadImage();
+	plat2Entity->count = count;
 
-	plat3Entity = new entity(mRenderer, 3, ticket);
+	plat3Entity = new entity(mRenderer, 3, ticket,lock);
 	plat3Entity->setTextureName("images/pipePlatform.png");
 	plat3Entity->setRotation(0.0f);
 	plat3Entity->setImageSourceRect(0, 0, 22, 96);
 	plat3Entity->setSizeRect(0,0,50,400);
 	plat3Entity->LoadImage();
+	plat3Entity->count = count;
 
-	angEntity = new entity(mRenderer, 4, ticket);
+	angEntity = new entity(mRenderer, 4, ticket,lock);
 	angEntity->setTextureName("images/pipePlatform.png");
 	angEntity->setRotation(-0.5f);
 	angEntity->setImageSourceRect(0, 0, 22, 96);
 	angEntity->setSizeRect(0,0,25,400);
 	angEntity->LoadImage();
+	angEntity->count = count;
 }
 
 LevelManager::~LevelManager(void)

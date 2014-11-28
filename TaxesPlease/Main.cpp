@@ -22,10 +22,44 @@ Constants * c;
 void gameLoop();
 int CallPlatEnt(void * data)
 {
-	game->level->platEntity->CallDraw();
+	while(true)
+	{
+		game->level->platEntity->CallDraw();
+	}
 	return 0;
 }
-
+int CallPlat2Ent(void * data)
+{
+	while(true)
+	{
+		game->level->plat2Entity->CallDraw();
+	}
+	return 0;
+}
+int CallPlat3Ent(void * data)
+{
+	while(true)
+	{
+		game->level->plat3Entity->CallDraw();
+	}
+	return 0;
+}
+int CallWaterEnt(void * data)
+{
+	while(true)
+	{
+		game->level->water->CallDraw();
+	}
+	return 0;
+}
+int CallAngEnt(void * data)
+{
+	while(true)
+	{
+		game->level->angEntity->CallDraw();
+	}
+	return 0;
+}
 int main(int argc, char **argv){
 	c =  new Constants();
 	c->QUIT = true;
@@ -64,8 +98,11 @@ int main(int argc, char **argv){
 	game = new Game(renderer,world,c);
 
 	double mClock = SDL_GetTicks();
-	SDL_Thread *thread = SDL_CreateThread(&CallPlatEnt, NULL, NULL);
-	
+	SDL_Thread * thread = SDL_CreateThread(&CallPlatEnt, NULL, NULL);
+	SDL_Thread * thread2 = SDL_CreateThread(&CallPlat2Ent, NULL, NULL);
+	SDL_Thread * thread3 = SDL_CreateThread(&CallPlat3Ent, NULL, NULL);
+	SDL_Thread * thread4 = SDL_CreateThread(&CallWaterEnt, NULL, NULL);
+	SDL_Thread * thread5 = SDL_CreateThread(&CallAngEnt, NULL, NULL);
 	while(c->QUIT){
 		//thread->join();
 		KeyboardManager::getKeys()->Update(eHandler);

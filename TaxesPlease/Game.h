@@ -13,10 +13,11 @@ private:
 	b2World* mWorld;	
 	Menu * menu;
 	Constants * c;
-	bool runGame;
+	
 	
 
 public:
+	bool runGame;
 	LevelManager * level;
 	Game(SDL_Renderer* renderer, b2World* bworld,Constants * con);
 	~Game(void);

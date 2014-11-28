@@ -25,8 +25,9 @@ public:
 	RevolutePlatforms * revol;
 	Player * player;
 	b2Vec2 Cam;
-	SDL_Thread *thread;
+	SDL_mutex * lock;
 	int * ticket;
+	int * count;
 	LevelManager(b2World * world,SDL_Renderer * renderer);
 	~LevelManager(void);
 	void CollisionWithWater();

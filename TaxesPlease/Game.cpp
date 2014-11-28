@@ -19,16 +19,16 @@ void Game::update(double deltaTime){
 	
 	mWorld->Step(timeStep, velocityIterations, positionIterations);	
 
-	SDL_RenderClear( mRenderer );
+	
 	int i=0;
-	if(runGame == false)
+	/*if(runGame == false)
 	{
 	  i = menu->Update();
 	}
 	else
-	{
+	{*/
 		level->Update();
-	}
+	//}
 	
 	if(i == 1)
 	{
@@ -38,14 +38,14 @@ void Game::update(double deltaTime){
 		c->QUIT = false;
 	}
 
-	if(runGame == false)
+	/*if(runGame == false)
 	{
 		menu->Draw();
 	}
 	else
-	{
-		level->Draw();
-	}
+	{*/
+		//level->Draw();
+	//}
 	
-	SDL_RenderPresent( mRenderer );
+	
 }
