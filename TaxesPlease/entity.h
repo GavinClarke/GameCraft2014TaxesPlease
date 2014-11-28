@@ -8,7 +8,7 @@ class entity
 private:
 	SDL_Texture * mTexture;
 	std::string name;
-	SDL_Rect sizeRect;
+	
 	SDL_Rect imageSourceRect;
 	SDL_Renderer * mRenderer;
 	float rotation;
@@ -24,6 +24,7 @@ private:
 			
 	}*/
 public:
+	SDL_Rect sizeRect;
 	entity(SDL_Renderer * renderer, int i,int * tickets,SDL_mutex * l);
 	~entity();
 	SDL_mutex * lock;

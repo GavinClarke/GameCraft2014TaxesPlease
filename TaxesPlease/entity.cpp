@@ -53,7 +53,7 @@ int entity::CallDraw()
 	
 	while(true)
 	{
-		SDL_RenderClear( mRenderer );
+		
 		LockTwo();
 		Draw();
 		UnlockTwo();
@@ -71,16 +71,30 @@ void entity::LockTwo()
 
 void entity::UnlockTwo()
 {
+	
+	
 	SDL_UnlockMutex( lock );
-	(*count) ++;
+	/*(*count) ++;
 	int n = 5;
 	int f = (*count);
 	while((*count) < n)
 	{
 
 	}
-	SDL_RenderPresent( mRenderer );
-	(*count) = 0;
+	if (m_id == 1)
+	{*/
+		
+	/*}*/
+	if ((*count) >=6)
+	{
+		SDL_RenderPresent(mRenderer);
+		
+	}
+	if ((*count) >= 6)
+	{
+		SDL_RenderClear(mRenderer);
+		(*count) = 0;
+	}
 }
 
 void entity::Lock(int pid)
@@ -120,7 +134,7 @@ int entity::getMax(int * ticketA)
 
 void entity::Draw()
 {
-
+	(*count)++;
 	SDL_RenderCopyEx(mRenderer, mTexture, &imageSourceRect, &sizeRect, (rotation*180.0/3.14159265), NULL, SDL_RendererFlip::SDL_FLIP_NONE);
 
 }

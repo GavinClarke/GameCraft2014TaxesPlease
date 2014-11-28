@@ -60,6 +60,14 @@ int CallAngEnt(void * data)
 	}
 	return 0;
 }
+int CallPlayEnt(void * data)
+{
+	while (true)
+	{
+		game->level->playEnt->CallDraw();
+	}
+	return 0;
+}
 int main(int argc, char **argv){
 	c =  new Constants();
 	c->QUIT = true;
@@ -103,6 +111,7 @@ int main(int argc, char **argv){
 	SDL_Thread * thread3 = SDL_CreateThread(&CallPlat3Ent, NULL, NULL);
 	SDL_Thread * thread4 = SDL_CreateThread(&CallWaterEnt, NULL, NULL);
 	SDL_Thread * thread5 = SDL_CreateThread(&CallAngEnt, NULL, NULL);
+	SDL_Thread * thread6 = SDL_CreateThread(&CallPlayEnt, NULL, NULL);
 	while(c->QUIT){
 		//thread->join();
 		KeyboardManager::getKeys()->Update(eHandler);

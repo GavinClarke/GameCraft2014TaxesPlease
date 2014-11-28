@@ -15,7 +15,7 @@ public:
 	void Update();
 	b2Vec2 GetPosition();
 	int count;
-	
+	SDL_Rect rect;
 	b2Body* dynamicBody;
 	void Death();
 private:
@@ -24,7 +24,7 @@ private:
 	b2Fixture* mFix;
 	b2FixtureDef fixtureDef;
 	SDL_Texture * m_texture;
-	SDL_Rect rect;
+	
 	SoundManager* sm;
 	bool isSpaceDown;
 	KeyboardManager* m_KeyboardMan;

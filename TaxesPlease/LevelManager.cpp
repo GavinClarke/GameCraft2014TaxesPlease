@@ -71,6 +71,15 @@ void LevelManager::CreateObjects()
 	angEntity->setSizeRect(0,0,25,400);
 	angEntity->LoadImage();
 	angEntity->count = count;
+
+	
+	playEnt = new entity(mRenderer, 4, ticket, lock);
+	playEnt->setTextureName("images/player.png");
+	playEnt->setRotation(0.0f);
+	playEnt->setImageSourceRect(0, 0, player->rect.w, player->rect.h);
+	playEnt->setSizeRect(0, 0, player->rect.w, player->rect.h);
+	playEnt->LoadImage();
+	playEnt->count = count;
 }
 
 LevelManager::~LevelManager(void)
@@ -88,6 +97,7 @@ void LevelManager::Update()
 	plat3Entity->setSizeRect(plat3->staticBody->GetPosition().x  -(500/2.5f),plat3->staticBody->GetPosition().y,50,400);
 	angEntity->setSizeRect(angPlat->staticBody->GetPosition().x  -(500/2.5f),angPlat->staticBody->GetPosition().y,25,400);
 	water->setSizeRect(0, position.x, position.y, 1280);
+	playEnt->setSizeRect(player->dynamicBody->GetPosition().x, player->dynamicBody->GetPosition().y, playEnt->sizeRect.w, playEnt->sizeRect.h);
 	CollisionWithWater();
 }
 
@@ -117,10 +127,11 @@ void LevelManager::Draw()
 	//plat2->Draw(mRenderer,b2Vec2(0,0));
 	//plat3->Draw(mRenderer,b2Vec2(0,0));
 	//angPlat->Draw(mRenderer,b2Vec2(0,0));
-	player->Render(mRenderer,b2Vec2(0,0));
+	//player->Render(mRenderer,b2Vec2(0,0));
 	//platEntity->Draw();
-	plat2Entity->Draw();
-	plat3Entity->Draw();
-	angEntity->Draw();
-	water->Draw();
+	//plat2Entity->Draw();
+	//plat3Entity->Draw();
+	//angEntity->Draw();
+	//water->Draw();
+	
 }

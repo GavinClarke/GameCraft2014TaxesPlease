@@ -24,6 +24,7 @@ public:
 	b2Vec2 position;
 	RevolutePlatforms * revol;
 	Player * player;
+	entity * playEnt;
 	b2Vec2 Cam;
 	SDL_mutex * lock;
 	int * ticket;
