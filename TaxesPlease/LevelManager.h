@@ -15,6 +15,7 @@
 #include "CONSTANTS.h"
 #include <random>
 #include <time.h>
+#include "SDL_thread.h"
 
 using namespace std;
 
@@ -30,16 +31,27 @@ private:
 	Level* m_nextLevel1;
 	Level* m_nextLevel2;
 
+	SDL_Thread* PreviousLevel;
+	SDL_Thread* CurrentLevel;
+	SDL_Thread* NextLevel1;
+	SDL_Thread* NextLevel2;
+	SDL_sem* lock;
+
+	b2Vec2 OSet;
+
 	int m_count;
 
 	Level* GetCurrentLevel();
 	Level* CreateRandomLevel();
 public:
-	LevelManager(b2World*, SDL_Renderer*, Player*);
+	LevelManager(b2World*, SDL_Renderer*, Player*,b2Vec2 offset);
 	~LevelManager();
 	void Initialize();
-	void Update();
-	void Render(SDL_Renderer*,b2Vec2);
+	void Update(b2Vec2 os);
+	int UpdatePrevLevel(void*);
+	int UpdateCurLevel(void*);
+	int UpdateNextLevel1(void*);
+	
 };
 
 #endif

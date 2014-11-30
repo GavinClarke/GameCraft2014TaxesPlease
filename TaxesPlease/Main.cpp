@@ -59,7 +59,8 @@ void SetupSDL() {
 void Initialize()
 {
 	p = new Player(m_world, gRenderer, b2Vec2(0, 600), 50);
-	m_levelManager = new LevelManager(m_world,gRenderer,p);
+	b2Vec2 offset = b2Vec2((p->GetPosition().x*METRESTOPIXELS) - CONSTANTS::SCREEN_WIDTH/2, (p->GetPosition().y*METRESTOPIXELS) + CONSTANTS::SCREEN_HEIGHT/2);
+	m_levelManager = new LevelManager(m_world,gRenderer,p,offset);
 	m_levelManager->Initialize();
 	worldPartsStep = m_world->CalculateReasonableParticleIterations(1/30.0f);
 	waterPartsStep = m_waterWorld->CalculateReasonableParticleIterations(1/30.0f);
@@ -77,7 +78,6 @@ void DrawEntities() {
 	} else {
 		SDL_RenderCopy( gRenderer, levelTexture, NULL, NULL ); 
 		b2Vec2 offset = b2Vec2((p->GetPosition().x*METRESTOPIXELS) - CONSTANTS::SCREEN_WIDTH/2, (p->GetPosition().y*METRESTOPIXELS) + CONSTANTS::SCREEN_HEIGHT/2);
-		m_levelManager->Render(gRenderer, offset);
 		p->Draw( gRenderer, offset );
 		w->Draw( gRenderer, offset );
 	}
@@ -104,8 +104,8 @@ void Update() {
 		m_world->Step(1/30.0f, velocityIterations, positionIterations, worldPartsStep);
 		m_waterWorld->Step(1/30.0f, velocityIterations, positionIterations, waterPartsStep);
 		DrawEntities();
-
-		m_levelManager->Update();
+		b2Vec2 offset = b2Vec2((p->GetPosition().x*METRESTOPIXELS) - CONSTANTS::SCREEN_WIDTH/2, (p->GetPosition().y*METRESTOPIXELS) + CONSTANTS::SCREEN_HEIGHT/2);
+		m_levelManager->Update(offset);
 		p->Update();
 
 		if (KeyboardManager::instance()->IsKeyDown(KeyboardManager::ESC))

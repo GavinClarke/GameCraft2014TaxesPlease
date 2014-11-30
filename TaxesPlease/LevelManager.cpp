@@ -5,11 +5,13 @@
 
 using namespace std;
 
-LevelManager::LevelManager(b2World* w, SDL_Renderer* r,Player* p)
+
+LevelManager::LevelManager(b2World* w, SDL_Renderer* r,Player* p,b2Vec2 offset)
 {
 	m_world = w;
 	m_player = p;
 	m_renderer = r;
+	OSet = offset;
 	srand ( time(NULL) );
 }
 
@@ -30,10 +32,37 @@ void LevelManager::Initialize()
 	m_currentLevel = m_levels[1];
 	m_nextLevel1 = m_levels[2];
 	m_nextLevel2 = m_levels[3];
+
+	lock = SDL_CreateSemaphore( 1 );
+	PreviousLevel = SDL_CreateThread(UpdatePrevLevel, "PreviousLevelThread", (void*)0);
+	CurrentLevel = SDL_CreateThread(UpdateCurLevel, "CurrentLevelThread", (void*)1);
+	m_nextLevel1 = SDL_CreateThread(UpdateNextLevel1, "NextLevel1Thread", (void*)2);
+	
 }
 
-void LevelManager::Update(){
+int LevelManager::UpdatePrevLevel(void* data){
+	SDL_SemWait( lock );
+	m_previousLevel->Update(m_player);
+	m_previousLevel->Render(m_renderer,OSet);
+	SDL_SemPost( lock );
 	
+}
+int LevelManager::UpdateCurLevel(void* data){
+	SDL_SemWait( lock );
+	m_currentLevel->Update(m_player);
+	m_currentLevel->Render(m_renderer,OSet);
+	SDL_SemPost( lock );
+}
+int LevelManager::UpdateNextLevel1(void* data){
+	SDL_SemWait( lock );
+	m_nextLevel1->Update(m_player);
+	m_nextLevel1->Render(m_renderer,OSet);
+	SDL_SemPost( lock );
+}
+
+
+void LevelManager::Update(b2Vec2 offset){
+	OSet = offset;
 	if(m_nextLevel1 == GetCurrentLevel())
 	{
 		m_previousLevel->~Level();
@@ -45,18 +74,12 @@ void LevelManager::Update(){
 		m_count++;
 	}
 
-	m_previousLevel->Update(m_player);
+	/*m_previousLevel->Update(m_player);
 	m_currentLevel->Update(m_player);
 	m_nextLevel1->Update(m_player);
-	m_nextLevel2->Update(m_player);
+	m_nextLevel2->Update(m_player);*/
 }
 
-void LevelManager::Render(SDL_Renderer* r, b2Vec2 offset){
-	
-	m_previousLevel->Render(r,offset);
-	m_currentLevel->Render(r,offset);
-	m_nextLevel1->Render(r,offset);
-}
 
 Level* LevelManager::GetCurrentLevel()
 {
