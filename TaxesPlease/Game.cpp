@@ -44,8 +44,10 @@ void Game::update(double deltaTime){
 	}
 	else
 	{*/
-		//level->Draw();
-	//}
+	SDL_RenderClear(mRenderer);
+	level->Draw();
+	SDL_RenderPresent(mRenderer);
+		//}
 	
 	
 }

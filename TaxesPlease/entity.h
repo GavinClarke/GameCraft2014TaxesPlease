@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
+#include <vector>
 
 class entity
 {
@@ -25,11 +26,11 @@ private:
 	}*/
 public:
 	SDL_Rect sizeRect;
-	entity(SDL_Renderer * renderer, int i,int * tickets,SDL_mutex * l);
+	entity(SDL_Renderer * renderer, int i,std::vector<int> & tickets,SDL_mutex * l);
 	~entity();
 	SDL_mutex * lock;
-	int * ticket;
-	void LoadImage();
+	std::vector<int> ticket;
+	static void LoadImage(std::string image, entity * ent);
 	int * count;
 	void Draw();
 	void setTextureName(std::string value);
@@ -40,7 +41,7 @@ public:
 	void Unlock(int pid);
 	void LockTwo();
 	void UnlockTwo();
-	int getMax(int * ticketA);
+	int getMax(std::vector<int> ticketA);
 	int CallDraw();
 };
 

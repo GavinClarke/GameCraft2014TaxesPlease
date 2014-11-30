@@ -11,15 +11,17 @@ LevelManager::LevelManager(b2World * world,SDL_Renderer * renderer)
 	player = new Player(world,renderer,b2Vec2(50,550),b2Vec2(25,25));
 	Cam = b2Vec2(player->GetPosition().x - 640,player->GetPosition().y - 360); 
 	
-	ticket = new int[4];
-	for (int i = 0; i < 4; i++)
+	
+	for (int i = 0; i < 6; i++)
 	{
-		ticket[i] = i;
+		ticket.push_back(i);
 	}
 	lock = SDL_CreateMutex();
-	count =new int (0);
+	count = 0;
+	canLoadImages = false;
+	imagesLoaded = false;
 	CreateObjects();
-	
+	canLoadImages = true;
 	
 	
 	SDL_Rect rect = SDL_Rect();
@@ -37,49 +39,49 @@ void LevelManager::CreateObjects()
 	water->setTextureName("images/BackGround.png");
 	water->setRotation(0.0f);
 	water->setImageSourceRect(0, 0, 780, 1280);
-	water->LoadImage();
-	water->count = count;
+	//water->LoadImage();
+	water->count = &count;
 
 	platEntity = new entity(mRenderer, 1, ticket,lock);
 	platEntity->setTextureName("images/pipePlatform.png");
 	platEntity->setRotation(0.0f);
 	platEntity->setImageSourceRect(0, 0, 22, 96);
 	platEntity->setSizeRect(0,0,50,800);
-	platEntity->LoadImage();
-	platEntity->count = count;
+	//platEntity->LoadImage();
+	platEntity->count = &count;
 
 	plat2Entity = new entity(mRenderer, 2, ticket,lock);
 	plat2Entity->setTextureName("images/pipePlatform.png");
 	plat2Entity->setRotation(0.0f);
 	plat2Entity->setImageSourceRect(0, 0, 22, 96);
 	plat2Entity->setSizeRect(0,0,50,400);
-	plat2Entity->LoadImage();
-	plat2Entity->count = count;
+	//plat2Entity->LoadImage();
+	plat2Entity->count = &count;
 
 	plat3Entity = new entity(mRenderer, 3, ticket,lock);
 	plat3Entity->setTextureName("images/pipePlatform.png");
 	plat3Entity->setRotation(0.0f);
 	plat3Entity->setImageSourceRect(0, 0, 22, 96);
 	plat3Entity->setSizeRect(0,0,50,400);
-	plat3Entity->LoadImage();
-	plat3Entity->count = count;
+	//plat3Entity->LoadImage();
+	plat3Entity->count = &count;
 
 	angEntity = new entity(mRenderer, 4, ticket,lock);
 	angEntity->setTextureName("images/pipePlatform.png");
 	angEntity->setRotation(-0.5f);
 	angEntity->setImageSourceRect(0, 0, 22, 96);
 	angEntity->setSizeRect(0,0,25,400);
-	angEntity->LoadImage();
-	angEntity->count = count;
+	//angEntity->LoadImage();
+	angEntity->count = &count;
 
 	
-	playEnt = new entity(mRenderer, 4, ticket, lock);
+	playEnt = new entity(mRenderer, 5, ticket, lock);
 	playEnt->setTextureName("images/player.png");
 	playEnt->setRotation(0.0f);
 	playEnt->setImageSourceRect(0, 0, player->rect.w, player->rect.h);
 	playEnt->setSizeRect(0, 0, player->rect.w, player->rect.h);
-	playEnt->LoadImage();
-	playEnt->count = count;
+	//playEnt->LoadImage();
+	playEnt->count = &count;
 }
 
 LevelManager::~LevelManager(void)
@@ -99,6 +101,11 @@ void LevelManager::Update()
 	water->setSizeRect(0, position.x, position.y, 1280);
 	playEnt->setSizeRect(player->dynamicBody->GetPosition().x, player->dynamicBody->GetPosition().y, playEnt->sizeRect.w, playEnt->sizeRect.h);
 	CollisionWithWater();
+	if(count >5)
+	{
+		canLoadImages = false;
+		imagesLoaded = true;
+	}
 }
 
 void LevelManager::CreatePlatForms()
@@ -128,10 +135,13 @@ void LevelManager::Draw()
 	//plat3->Draw(mRenderer,b2Vec2(0,0));
 	//angPlat->Draw(mRenderer,b2Vec2(0,0));
 	//player->Render(mRenderer,b2Vec2(0,0));
-	//platEntity->Draw();
-	//plat2Entity->Draw();
-	//plat3Entity->Draw();
-	//angEntity->Draw();
-	//water->Draw();
-	
+	if(imagesLoaded == true)
+	{
+		platEntity->Draw();
+		plat2Entity->Draw();
+		plat3Entity->Draw();
+		angEntity->Draw();
+		water->Draw();
+		playEnt->Draw();
+	}
 }

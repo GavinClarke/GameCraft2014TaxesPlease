@@ -20,51 +20,107 @@ SDL_Event eHandler;
 Game* game;
 Constants * c;
 void gameLoop();
-int CallPlatEnt(void * data)
+
+int LoadPipeImage(void * data)
 {
+	bool once = false;
 	while(true)
 	{
-		game->level->platEntity->CallDraw();
+		if(game->level->canLoadImages == true)
+		{
+			game->level->platEntity->LoadImage("images/pipePlatform.png",game->level->platEntity);
+			if(once == false)
+			{
+				game->level->count++;
+				once = true;
+			}
+		}
 	}
 	return 0;
 }
-int CallPlat2Ent(void * data)
+int LoadPipe2Image(void * data)
 {
+	bool once = false;
 	while(true)
 	{
-		game->level->plat2Entity->CallDraw();
+		if(game->level->canLoadImages == true)
+		{
+			game->level->plat2Entity->LoadImage("images/pipePlatform.png",game->level->plat2Entity);
+			if(once == false)
+			{
+				game->level->count++;
+				once = true;
+			}
+		}
 	}
 	return 0;
 }
-int CallPlat3Ent(void * data)
+int LoadPipe3Image(void * data)
 {
+	bool once = false;
 	while(true)
 	{
-		game->level->plat3Entity->CallDraw();
+		if(game->level->canLoadImages == true)
+		{
+			game->level->plat3Entity->LoadImage("images/pipePlatform.png",game->level->plat3Entity);
+			if(once == false)
+			{
+				game->level->count++;
+				once = true;
+			}
+		}
 	}
 	return 0;
 }
-int CallWaterEnt(void * data)
+int LoadPipe4Image(void * data)
 {
+	bool once = false;
 	while(true)
 	{
-		game->level->water->CallDraw();
+		if(game->level->canLoadImages == true)
+		{
+			game->level->angEntity->LoadImage("images/pipePlatform.png",game->level->angEntity);
+			if(once == false)
+			{
+				game->level->count++;
+				once = true;
+			}
+		}
 	}
 	return 0;
 }
-int CallAngEnt(void * data)
+
+int LoadPlayerImage(void * data)
 {
-	while(true)
-	{
-		game->level->angEntity->CallDraw();
-	}
-	return 0;
-}
-int CallPlayEnt(void * data)
-{
+	bool once = false;
 	while (true)
 	{
-		game->level->playEnt->CallDraw();
+		if(game->level->canLoadImages == true)
+		{
+			game->level->playEnt->LoadImage("images/player.png",game->level->playEnt);
+			if(once == false)
+			{
+				game->level->count++;
+				once = true;
+			}
+		}
+	}
+	return 0;
+}
+int LoadWaterImage(void * data)
+{
+	bool once = false;
+	while (true)
+	{
+		if(game->level->canLoadImages == true)
+		{
+			game->level->water->LoadImage("images/BackGround.png",game->level->water);
+			if(once == false)
+			{
+				game->level->count++;
+				once = true;
+			}
+		}
 	}
 	return 0;
 }
@@ -106,12 +162,12 @@ int main(int argc, char **argv){
 	game = new Game(renderer,world,c);
 
 	double mClock = SDL_GetTicks();
-	SDL_Thread * thread = SDL_CreateThread(&CallPlatEnt, NULL, NULL);
-	SDL_Thread * thread2 = SDL_CreateThread(&CallPlat2Ent, NULL, NULL);
-	SDL_Thread * thread3 = SDL_CreateThread(&CallPlat3Ent, NULL, NULL);
-	SDL_Thread * thread4 = SDL_CreateThread(&CallWaterEnt, NULL, NULL);
-	SDL_Thread * thread5 = SDL_CreateThread(&CallAngEnt, NULL, NULL);
-	SDL_Thread * thread6 = SDL_CreateThread(&CallPlayEnt, NULL, NULL);
+	SDL_Thread * thread = SDL_CreateThread(&LoadWaterImage, NULL, NULL);
+	SDL_Thread * thread2 = SDL_CreateThread(&LoadPlayerImage, NULL, NULL);
+	SDL_Thread * thread3 = SDL_CreateThread(&LoadPipeImage, NULL, NULL);
+	SDL_Thread * thread4 = SDL_CreateThread(&LoadPipe2Image, NULL, NULL);
+	SDL_Thread * thread5 = SDL_CreateThread(&LoadPipe3Image, NULL, NULL);
+	SDL_Thread * thread6 = SDL_CreateThread(&LoadPipe4Image, NULL, NULL);
 	while(c->QUIT){
 		//thread->join();
 		KeyboardManager::getKeys()->Update(eHandler);

@@ -1,10 +1,10 @@
 #include "entity.h"
 
 
-entity::entity(SDL_Renderer * renderer, int i, int * tickets,SDL_mutex * l)
+entity::entity(SDL_Renderer * renderer, int i, std::vector<int> & tickets,SDL_mutex * l)
 {
 	mRenderer = renderer;
-	MAX = 4;
+	MAX = 6;
 	ticket = tickets;
 	m_id = i;
 	lock = l;
@@ -15,9 +15,11 @@ entity::~entity()
 }
 
 
-void entity::LoadImage()
+void entity::LoadImage(std::string image, entity * ent)
 {
-	mTexture = IMG_LoadTexture(mRenderer, name.c_str());
+	ent->LockTwo();
+	ent->mTexture = IMG_LoadTexture(ent->mRenderer, image.c_str());
+	ent->UnlockTwo();
 }
 
 void entity::setTextureName(std::string value)
@@ -53,6 +55,10 @@ int entity::CallDraw()
 	
 	while(true)
 	{
+		if ((*count) == 0)
+		{
+			
+		}
 		
 		LockTwo();
 		Draw();
@@ -65,7 +71,6 @@ int entity::CallDraw()
 
 void entity::LockTwo()
 {
-	//lock
 	SDL_LockMutex(lock);
 }
 
@@ -74,27 +79,8 @@ void entity::UnlockTwo()
 	
 	
 	SDL_UnlockMutex( lock );
-	/*(*count) ++;
-	int n = 5;
-	int f = (*count);
-	while((*count) < n)
-	{
-
-	}
-	if (m_id == 1)
-	{*/
-		
-	/*}*/
-	if ((*count) >=6)
-	{
-		SDL_RenderPresent(mRenderer);
-		
-	}
-	if ((*count) >= 6)
-	{
-		SDL_RenderClear(mRenderer);
-		(*count) = 0;
-	}
+	
+	
 }
 
 void entity::Lock(int pid)
@@ -117,9 +103,14 @@ void entity::Lock(int pid)
 void entity::Unlock(int pid)
 {
 	ticket[pid] = 0;
+	if ((*count) >=6)
+	{
+		SDL_RenderPresent(mRenderer);
+		(*count) = 0;
+	}
 }
 
-int entity::getMax(int * ticketA)
+int entity::getMax(std::vector<int> ticketA)
 {
 	int current = 0;
 	for (int i = 0; i < MAX; i++)
@@ -134,7 +125,6 @@ int entity::getMax(int * ticketA)
 
 void entity::Draw()
 {
-	(*count)++;
 	SDL_RenderCopyEx(mRenderer, mTexture, &imageSourceRect, &sizeRect, (rotation*180.0/3.14159265), NULL, SDL_RendererFlip::SDL_FLIP_NONE);
 
 }
